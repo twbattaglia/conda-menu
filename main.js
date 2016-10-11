@@ -10,7 +10,7 @@ var opts = {
   resizable: false,
   movable: false,
   //alwaysOnTop: true,
-  title: "conda-menu",
+  title: "Conda-menu",
   width: 305,
   height: 350
 }
