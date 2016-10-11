@@ -16,7 +16,6 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "appdmg": "^0.4.5",
     "electron-builder": "latest",
     "electron-packager": "latest",
     "electron-prebuilt": "latest",
@@ -34,7 +33,6 @@
     "start": "electron . --enable-logging",
     "dev": "NODE_ENV='development' npm run start",
     "build": "electron-packager . conda-menu --platform=darwin --out build --version=1.3.7 --icon=build/Icon.icns --overwrite",
-    "package": "appdmg build/appdmg.json dist/condaBarInstaller.dmg",
-    "clean": "rm -rf build/condaBar-darwin-x64 | rm -rf dist/condaBarInstaller.dmg"
+    "clean": "rm -rf build/conda-menu-darwin-x64 | rm -rf dist/conda-menu-Installer.dmg"
   }
 }
