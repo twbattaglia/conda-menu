@@ -53,3 +53,4 @@ App Icon: Ouroboros by Silas Reeves from the Noun Project
 - [ ] add new anaconda channels
 - [ ] option to open app at startup
 - [ ] github auto-updates
+- [ ] add homebrew installation
