@@ -1,0 +1,227 @@
+<!DOCTYPE HTML>
+<html lang="en" ng-app="ngApp">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="app/css/bootstrap.min.css">
+    <link rel="stylesheet" href="app/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="app/css/selectize.bootstrap3.min.css" />
+
+    <link rel="stylesheet" href="app/js/ladda/dist/ladda-themeless.min.css">
+
+    <link rel="stylesheet" href="app/css/custom.css">
+</head>
+
+<body ng-controller='mainCtrl'>
+
+  <!-- Top navbar -->
+  <nav class="navbar navbar-dark bg-primary navbar-fixed-top">
+
+    <form class="form-inline">
+      <div class="row">
+        <div class="col-xs-8">
+          <input type="text" class="form-control" placeholder="Search..." ng-model="searchEnv">
+        </div>
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary pull-xs-left" data-toggle="modal" data-target="#createEnvModal">
+            Create
+          </button>
+        </div>
+      </div>
+    </form>
+  </nav>
+
+  <div id="main-container">
+
+    <!-- Env listing -->
+    <div class="list-group">
+      <div class="list-group-item list-group-item-action" ng-repeat="item in environments | filter:searchEnv | orderBy: 'prefix'">
+        <span class="pull-xs-right">
+          <button ng-click="launch_env(item)" type="button" class="btn btn-outline-success">
+            <i class="icon ion-arrow-up-c" style="font-size:14px;"></i>
+          </button>
+          <button ng-click="getInfoModal(item)" type="button" class="btn btn-outline-secondary">
+            <i class="icon ion-information-circled" style="font-size:14px;"></i>
+          </button>
+          <button ng-click="removeEnvModal(item)" type="button" class="btn btn-outline-danger">
+            <i class="icon ion-trash-b" style="font-size:14px;"></i>
+          </button>
+        </span>
+        <h5>{{item.prefix}}</h5>
+        <b>{{item.version}}</b>
+      </div>
+    </div>
+
+    <!-- Footer listing -->
+    <nav class="navbar navbar-fixed-bottom navbar-light" id="footerBar">
+      <button type="submit" class="btn btn-primary pull-xs-left" data-toggle="modal" data-target="#settingsModal">Settings</button>
+      <button type="submit" class="btn btn-primary pull-xs-right" ng-click="quit()">Quit</button>
+    </nav>
+  </div>
+
+  <!-- Create new env modal -->
+  <div class="modal fade" id="createEnvModal" tabindex="-1" role="dialog" aria-labelledby="createEnvModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h5 class="modal-title">Create New Environment</h5>
+        </div>
+        <div class="modal-body">
+          <form id="createEnvModalClear">
+            <div class="form-group">
+              <h5>Environment name</h5>
+              <input type="text" class="form-control" id="envName" aria-describedby="Name" placeholder="Enter name..." ng-model="newEnvName">
+            </div>
+            <div class="form-group">
+              <h5 >Python version</h5>
+              <select class="form-control" id="pythonVersion" ng-model="newEnvVersion">
+                <option>3.5</option>
+                <option>3.4</option>
+                <option>2.7</option>
+                <option>2.6</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <h5>Packages</h5>
+              <selectize config='newEnvPackagesConfig' options='installed' ng-model="newEnvPackages"></selectize>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="clearForm()">Close</button>
+          <button type="button" class="btn btn-primary" ladda="createLoading" ng-click="create_env(newEnvName, newEnvVersion, newEnvPackages)">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Env info modal -->
+  <div class="modal fade" id="envInfoModal" tabindex="-1" role="dialog" aria-labelledby="envInfoModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h5 class="modal-title">{{getInfoName}}</h5>
+        </div>
+        <div class="modal-body">
+          <table class="table table-sm table-hover">
+            <thead>
+              <tr>
+                <th>Package</th>
+                <th>Version</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="pkg in getInfoPkgs | orderBy: 'name'">
+                <td>{{pkg.name}}</td>
+                <td>{{pkg.version}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Remove env modal -->
+  <div class="modal fade" id="envDeleteModal" tabindex="-1" role="dialog" aria-labelledby="envDeleteModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Remove environment</h4>
+        </div>
+        <div class="modal-body">
+          <h5>Are you sure you would like to remove <b>{{removeEnvModalName}}</b>?</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" ladda="removeLoading" ng-click="remove_env(removeEnvModalName)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings modal -->
+  <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Settings</h4>
+        </div>
+        <div class="modal-body">
+
+          <form>
+            <div class="form-group row">
+              <b class="col-sm-2 col-form-label">Terminal Program</b>
+              <div class="col-sm-10">
+                <p class="form-control-static">Terminal (todo)</p>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group row">
+              <b class="col-sm-2 col-form-label">Default Python Version</b>
+              <div class="col-sm-10">
+                <p class="form-control-static">{{condaInfo.python_version}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group row">
+              <b class="col-sm-2 col-form-label">Conda-Env Version</b>
+              <div class="col-sm-10">
+                <p class="form-control-static">{{condaInfo.conda_env_version}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group row">
+              <b class="col-sm-2 col-form-label">Conda-Env Directories</b>
+              <div class="col-sm-10">
+                <p class="form-control-static">{{condaInfo.envs_dirs[0]}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group row">
+              <b class="col-sm-2 col-form-label">Root Location</b>
+              <div class="col-sm-10">
+                <p class="form-control-static">{{condaInfo.root_prefix}}</p>
+              </div>
+            </div>
+            <hr>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
+  <script type="text/javascript" src="./node_modules/angular/angular.js"></script>
+  <script type="text/javascript" src="./node_modules/angular-route/angular-route.js"></script>
+
+  <script type="text/javascript" src="app/js/ladda/dist/spin.min.js"></script>
+  <script type="text/javascript" src="app/js/ladda/dist/ladda.min.js"></script>
+  <script type="text/javascript" src="app/js/angular-ladda/dist/angular-ladda.min.js"></script>
+
+  <script type="text/javascript" src="app/js/selectize.min.js"></script>
+  <script type="text/javascript" src="app/js/angular-selectize.js"></script>
+
+  <script type="text/javascript" src="app/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript" src="app/app.js"></script>
+</body>
+</html>

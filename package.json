@@ -1,0 +1,42 @@
+{
+  "name": "condaBar",
+  "author": "Thomas W. Battaglia <tombattagl@gmail.com>",
+  "version": "0.0.1",
+  "description": "A menubar app for creating and launching conda virtual environments.",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-route": "^1.5.8",
+    "conda": "0.0.1-a17",
+    "fix-path": "^2.0.0",
+    "jquery": "^3.1.0",
+    "menubar": "^5.0.0",
+    "python-shell": "^0.4.0",
+    "remote": "^0.2.6",
+    "shelljs": "^0.7.4",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "appdmg": "^0.4.5",
+    "electron-builder": "latest",
+    "electron-packager": "latest",
+    "electron-prebuilt": "latest",
+    "electron-rebuild": "latest",
+    "jshint": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/twbattaglia/condaBar"
+  },
+  "license": "MIT",
+  "main": "main.js",
+  "scripts": {
+    "test": "node_modules/jshint/bin/jshint ./app/app.js",
+    "start": "electron . --enable-logging",
+    "dev": "NODE_ENV='development' npm run start",
+    "build": "electron-packager . condaBar --platform=darwin --out build --arch=x64 --version=1.3.7 --icon=build/Icon.icns --overwrite",
+    "package": "appdmg build/appdmg.json dist/condaBarInstaller.dmg",
+    "dist": "npm run build | npm run package",
+    "clean": "rm -rf build/condaBar-darwin-x64 | rm -rf dist/condaBarInstaller.dmg",
+    "release": "git tag -a 1.0.0 -m 'Release of version 1.0.0' "
+  }
+}
