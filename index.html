@@ -17,7 +17,7 @@
 <body ng-controller='mainCtrl'>
 
   <!-- Top navbar -->
-  <nav class="navbar navbar-dark bg-primary navbar-fixed-top">
+  <nav class="navbar navbar-dark navbar-fixed-top" style="background-color: #4183D7;">
 
     <form class="form-inline">
       <div class="row">
@@ -37,7 +37,7 @@
 
     <!-- Env listing -->
     <div class="list-group">
-      <div class="list-group-item list-group-item-action" ng-repeat="item in environments | filter:searchEnv | orderBy: 'prefix'">
+      <div class="list-group-item" ng-repeat="item in environments | filter:searchEnv | orderBy: 'prefix'">
         <span class="pull-xs-right">
           <button ng-click="launch_env(item)" type="button" class="btn btn-outline-success">
             <i class="icon ion-arrow-up-c" style="font-size:14px;"></i>
@@ -50,7 +50,7 @@
           </button>
         </span>
         <h5>{{item.prefix}}</h5>
-        <b>{{item.version}}</b>
+        <p style="color:#808080">{{item.version}}</p>
       </div>
     </div>
 
@@ -74,11 +74,11 @@
         <div class="modal-body">
           <form id="createEnvModalClear">
             <div class="form-group">
-              <h5>Environment name</h5>
+              <b>Environment name</b>
               <input type="text" class="form-control" id="envName" aria-describedby="Name" placeholder="Enter name..." ng-model="newEnvName">
             </div>
             <div class="form-group">
-              <h5 >Python version</h5>
+              <b>Python version</b>
               <select class="form-control" id="pythonVersion" ng-model="newEnvVersion">
                 <option>3.5</option>
                 <option>3.4</option>
@@ -87,7 +87,7 @@
               </select>
             </div>
             <div class="form-group">
-              <h5>Packages</h5>
+              <b>Packages</b>
               <selectize config='newEnvPackagesConfig' options='installed' ng-model="newEnvPackages"></selectize>
             </div>
           </form>

@@ -6,7 +6,7 @@ html {
 
 body {
   font-family: 'Oswald', sans-serif;
-  background-color: #FFFFFF;
+  background-color: #EEEEEE;
 }
 
 #main-container {
@@ -17,4 +17,8 @@ body {
 
 #footerBar {
   background-color: #4183D7;
+}
+
+.list-group-item{
+  padding-bottom: 0px;
 }

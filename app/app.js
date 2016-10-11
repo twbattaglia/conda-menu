@@ -96,6 +96,7 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
 
 
     // Settings for selectize
+    $scope.newEnvVersion = "3.5";
     $scope.newEnvPackages = [name = "pip"];
     $scope.newEnvPackagesConfig = {
       create: true,
