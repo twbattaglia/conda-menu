@@ -1,8 +1,11 @@
-# conda-menu
+# Conda-menu
 An Electron based menubar app for creating and launching Conda virtual environments.
 
 ## Installation
 Download the latest version for your platform from [releases](https://github.com/twbattaglia/conda-menu/releases). Currently Conda-menu only supports macOS.
+
+## Screenshots
+![Conda-menu Screenshot](build/screenshot.png)  
 
 ## Requirements
 To load or create any new conda environments, you must have anaconda/miniconda installed first. If you do not have anaconda installed, see https://www.continuum.io/downloads#osx to download the GUI installation or run the command below to install miniconda through the command-line.
@@ -17,7 +20,7 @@ bash Miniconda2-latest-MacOSX-x86_64.sh -b
 ```
 
 ## Development
-```
+```bash
 # Install latest Electron (if needed)
 npm install electron -g
 
@@ -34,14 +37,14 @@ npm install
 npm run dev
 ```
 
-# Powered By
+## Powered By
 Electron: http://electron.atom.io/)  
 Node.js : https://nodejs.org)  
 (Continuum Analytics, Inc.) Conda AP: https://github.com/conda/conda-api  
 Electron-Menubar: https://github.com/maxogden/menubar  
 App Icon: Ouroboros by Silas Reeves from the Noun Project  
 
-# Future features
+## Future features
 - [ ] validate conda installation
 - [ ] add option to import requirments.yaml file during new env creation  
 - [ ] upload/export env's
