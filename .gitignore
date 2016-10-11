@@ -39,3 +39,5 @@ jspm_packages
 *.pyc
 
 build/Conda-menu-darwin-x64/
+
+dist/conda-menu-mac.zip
