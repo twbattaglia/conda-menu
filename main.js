@@ -1,15 +1,16 @@
 // Required modules
 var menubar = require('menubar')
+var path = require("path")
 
 // Initialize manubar
 var opts = {
   preloadWindow: true,
-  showDockIcon: true,
-  icon: 'build/trayTemplate.png',
+  showDockIcon: false,
+  icon: path.join(__dirname, '/build/IconTemplate.png'),
   resizable: false,
   movable: false,
   //alwaysOnTop: true,
-  title: "condaBar",
+  title: "conda-menu",
   width: 305,
   height: 350
 }
