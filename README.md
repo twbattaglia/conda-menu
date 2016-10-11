@@ -1,5 +1,6 @@
 # Conda-menu
 An Electron based menubar app for creating and launching Conda virtual environments.
+[![Build Status](https://travis-ci.org/twbattaglia/conda-menu.svg?branch=master)](https://travis-ci.org/twbattaglia/conda-menu)  
 
 ## Installation
 Download the latest version for your platform from [releases](https://github.com/twbattaglia/conda-menu/releases). Currently Conda-menu only supports macOS.
