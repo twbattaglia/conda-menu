@@ -1,5 +1,5 @@
 # Conda-menu
-An Electron based menubar app for creating and launching Conda virtual environments.
+An Electron based menubar app for creating and launching Conda virtual environments.  
 [![Build Status](https://travis-ci.org/twbattaglia/conda-menu.svg?branch=master)](https://travis-ci.org/twbattaglia/conda-menu)  
 
 ## Installation
