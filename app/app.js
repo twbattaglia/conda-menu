@@ -94,7 +94,6 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
       });
     };
 
-
     // Settings for selectize
     $scope.newEnvVersion = "3.5";
     $scope.newEnvPackages = [name = "pip"];
@@ -132,6 +131,7 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
         $('#createEnvModal').on('hidden.bs.modal', function () {
             $(this).find('form').trigger('reset');
         });
+        $scope.newEnvPackages = [name = "pip"]; // reset packages
       });
     };
 
@@ -140,6 +140,7 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
       $('#createEnvModal').on('hidden.bs.modal', function () {
           $(this).find('form').trigger('reset');
       });
+      $scope.newEnvPackages = [name = "pip"];
     };
 
     // Create modal for removing conda-env
@@ -181,6 +182,9 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
     $scope.get_envs();
     $scope.get_installed();
     $scope.get_conda_info()
+
+    // Launch with settings
+    $scope.launchWithApp = "Terminal.app"
 
 }]); // End of main controller
 
