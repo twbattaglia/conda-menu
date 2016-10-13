@@ -8,6 +8,12 @@ var shelljs = require('shelljs');
 var app = require('electron').remote.app;
 fixPath();
 
+// Verify anaconda installation
+if (!shelljs.which('conda')) {
+  confirm("Conda installation could not be found! Please install anaconda or miniconda before running again!");
+  app.quit();
+}
+
 // Get anaconda prefix location
 var aPrefix = shelljs.which('conda').stdout.replace("/bin/conda", "");
 console.log("Anaconda root prefix:", aPrefix);
@@ -33,7 +39,7 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
       app.quit();
     };
 
-    // Function to quit the app
+    // Function to refresh envs
     $scope.refresh = function(){
       $scope.get_envs();
     };
@@ -176,15 +182,15 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
     };
 
     // Checkbox for settings
-    $scope.checkboxModel = false
+    $scope.checkboxModel = false;
 
     // Run at app startup
     $scope.get_envs();
     $scope.get_installed();
-    $scope.get_conda_info()
+    $scope.get_conda_info();
 
     // Launch with settings
-    $scope.launchWithApp = "Terminal.app"
+    $scope.launchWithApp = "Terminal.app";
 
 }]); // End of main controller
 
@@ -196,4 +202,4 @@ ngApp.config(function (laddaProvider) {
       spinnerSize: 14,
       spinnerColor: '#ffffff'
     });
-  })
+  });

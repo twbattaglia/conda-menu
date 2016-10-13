@@ -5,9 +5,3 @@ node_js:
 os:
   - osx
 osx_image: xcode7.3
-matrix:
-  include:
-    - os: osx
-      env: TARGET_ARCH=x64
-  allow_failures:
-    - os: osx

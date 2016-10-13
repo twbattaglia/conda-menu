@@ -1,7 +1,8 @@
 ### 0.1.1 (TBD)
-- minor UI tweaks  
+- UI tweaks  
 - added tooltips to icons  
 - fix form issues
+- added alert if conda installation could not be found
 
 ### 0.1.0 (2016-10-11)
 - First release of a working-ish version

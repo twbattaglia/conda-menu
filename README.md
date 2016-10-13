@@ -46,8 +46,8 @@ Electron-Menubar: https://github.com/maxogden/menubar
 App Icon: Ouroboros by Silas Reeves from the Noun Project  
 
 ## Future features
-- [ ] validate conda installation
-- [ ] add option to import requirments.yaml file during new env creation  
+- [x] validate conda installation
+- [ ] add option to import requirements.yaml file during new env creation  
 - [ ] upload/export env's
 - [ ] change/set default Terminal program
 - [ ] add new anaconda channels

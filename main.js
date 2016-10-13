@@ -9,7 +9,6 @@ var opts = {
   icon: path.join(__dirname, '/build/IconTemplate.png'),
   resizable: false,
   movable: false,
-  //alwaysOnTop: true,
   title: "Conda-menu",
   width: 305,
   height: 350
