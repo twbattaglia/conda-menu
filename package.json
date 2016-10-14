@@ -1,7 +1,7 @@
 {
   "name": "Conda-menu",
   "author": "Thomas W. Battaglia <tombattagl@gmail.com>",
-  "version": "0.1.1-dev",
+  "version": "0.1.1",
   "description": "An Electron based menubar app for creating and launching conda virtual environments.",
   "dependencies": {
     "angular": "^1.5.8",
@@ -34,7 +34,7 @@
     "start": "electron . --enable-logging",
     "dev": "NODE_ENV='development' npm run start",
     "build": "electron-packager . Conda-menu --platform=darwin --out build --version=1.4.3 --icon=build/Icon.icns --overwrite",
-    "clean": "rm -rf build/Conda-menu-darwin-x64 | rm -rf dist/conda-menu-mac.zip",
+    "clean": "rm -rf build/Conda-menu-darwin-x64 | rm -rf dist/*",
     "compress": "bash build/compress",
     "release": "npm run build && npm run compress"
   }

@@ -1,4 +1,4 @@
-### 0.1.1 (TBD)
+### 0.1.1 (2016-10-14)
 - UI tweaks  
 - added tooltips to icons  
 - fix form issues
