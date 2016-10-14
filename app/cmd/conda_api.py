@@ -222,6 +222,17 @@ def create(name=None, prefix=None, pkgs=None):
     return out
 
 
+def create_yml(yml=None):
+    """
+    Create new env from YAML file
+    """
+    if not yml:
+        raise TypeError('Must specify a name and yaml file location')
+    cmd_list    = ['env', 'create', '--file', yml]    
+    (out, err) = _call_conda(cmd_list)
+    return out
+
+
 def install(name=None, prefix=None, pkgs=None):
     """
     Install packages into an environment either by name or path with a

@@ -41,3 +41,5 @@ jspm_packages
 build/Conda-menu-darwin-x64/
 
 dist/conda-menu-mac.zip
+
+app/cmd/testing.py

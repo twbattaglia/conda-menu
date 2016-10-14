@@ -1,7 +1,6 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
-
 html {
   font-size: 12px;
+  font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 body {
@@ -21,4 +20,18 @@ body {
 
 .list-group-item{
   padding-bottom: 0px;
+}
+
+.file-hover {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1 !important;
+  background-color: black;
+  filter: alpha(opacity=40); /* internet explorer */
+  -khtml-opacity: 0.40;      /* khtml, old safari */
+    -moz-opacity: 0.40;      /* mozilla, netscape */
+         opacity: 0.40;      /* fx, safari, opera */
 }

@@ -47,8 +47,9 @@ App Icon: Ouroboros by Silas Reeves from the Noun Project
 
 ## Future features
 - [x] validate conda installation
-- [ ] add option to import requirements.yaml file during new env creation  
-- [ ] upload/export env's
+- [x] add option to import requirements.yaml file during new env creation  
+- [ ] upload env's to anaconda
+- [ ] export env's to YML
 - [ ] change/set default Terminal program
 - [ ] add new anaconda channels
 - [ ] option to open app at startup

@@ -34,6 +34,9 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
     // Quality testing
     $scope.testing = "hello!";
 
+    // Set root prefix
+    $scope.anacondaRoot = aPrefix;
+
     // Function to quit the app
     $scope.quit = function(){
       app.quit();
@@ -141,6 +144,71 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
       });
     };
 
+    // Functions to create YML when file is dragged into app
+    document.body.ondragover = function(e) {
+      $('body').addClass('file-hover');
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'copy';
+      return false;
+    };
+    document.body.ondrop = function(ev) {
+      $('body').removeClass('file-hover');
+      var file_path = ev.dataTransfer.files[0].path;
+      console.log(file_path);
+      $('#createEnvYamlModal').modal('show');
+      $scope.create_env_yml(file_path);
+      ev.preventDefault();
+    };
+    document.body.ondragleave = function () {
+      $('body').removeClass('file-hover');
+      return false;
+    };
+
+    // Function to create YML generated env
+    $scope.create_env_yml = function(yml){
+      console.log("Creating YML environment", name);
+      pythonShell.run('create_env_yml.py',
+      {mode: 'json', args: [aPrefix, yml]},
+      function (err, results) {
+        if (err) {
+          console.log("Create error:", err);
+          alert(err);
+          console.log("Create results:", results);
+        }
+        console.log("Creating YAML environment, completed.");
+        $scope.get_envs();
+        $('#createEnvModal').modal('hide');
+        $('#createEnvYamlModal').modal('hide');
+        $scope.clearForm();
+        $scope.createLoadingYml = false;
+      });
+    };
+
+
+    // Dialog for creating new YAML env
+    $scope.openDialog = function() {
+        $scope.createLoadingYml = true;
+        require('electron').remote.dialog.showOpenDialog({
+            title: 'open YAML',
+            properties: ['openFile'],
+            buttonLabel: "Import",
+            filters: [
+              {name: 'YAML', extensions: ['yml', 'yaml', 'txt']},
+              {name: 'All Files', extensions: ['*']}
+          ]
+        }, function(file) {
+          if(file === undefined){
+              $('#createEnvModal').modal('hide');
+              $scope.createLoadingYml = false;
+              console.log("No file selected");
+          } else{
+              console.log("file selected");
+              $scope.create_env_yml(file);
+          }
+        });
+    };
+
+
     // Clear create-env form on cancel
     $scope.clearForm = function(){
       $('#createEnvModal').on('hidden.bs.modal', function () {
@@ -197,9 +265,9 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
 
 // Global settings for ladda spinner
 ngApp.config(function (laddaProvider) {
-    laddaProvider.setOption({ /* optional */
+    laddaProvider.setOption({
       style: 'expand-left',
       spinnerSize: 14,
       spinnerColor: '#ffffff'
     });
-  });
+});

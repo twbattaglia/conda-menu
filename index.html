@@ -93,6 +93,7 @@
           </form>
         </div>
         <div class="modal-footer">
+          <button type="button" class="btn pull-xs-left" ladda="createLoadingYml" ng-click="openDialog()">Import YML</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="clearForm()">Close</button>
           <button type="button" class="btn btn-primary" ladda="createLoading" ng-click="create_env(newEnvName, newEnvVersion, newEnvPackages)">Create</button>
         </div>
@@ -130,6 +131,21 @@
     </div>
   </div>
 
+  <!-- Create Env-YAML modal -->
+  <div class="modal fade" id="createEnvYamlModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Creating Environment from YAML File</h5>
+        </div>
+        <div class="modal-body">
+          <h5> Please wait...</h5>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
   <!-- Remove env modal -->
   <div class="modal fade" id="envDeleteModal" tabindex="-1" role="dialog" aria-labelledby="envDeleteModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -166,51 +182,44 @@
             <div class="form-check">
               <h5 class="form-check-label">
                 <input class="form-check-input" type="checkbox" ng-modal="checkboxModel">  Start app at login</input>
-                <small id="checkboxModelHelp" class="form-text text-muted">Conda-menu will be added as a system login items</small>
+                <small id="checkboxModelHelp" class="form-text text-muted">Conda-menu will launch at startup</small>
               </h5>
             </div>
             <hr>
-            <div class="form-group row">
-              <h5 class="col-sm-2 col-form-label">Default Command-line App</h5>
+            <div class="form-group">
               <div class="col-sm-10">
                 <div class="form-group">
-                  <input type="file" class="form-control-file" id="launchWithApp" aria-describedby="launchWith" ng-modal="launchWithApp">
-                  <small id="launchWithAppHelp" class="form-text text-muted">Default app is Terminal</small>
+                  <button type="button" class="btn" ng-click="openDialog()">Default Program</button>
+                  <p id="launchWithAppHelp" class="form-text text-muted">Default app is Terminal</p>
                 </div>
               </div>
             </div>
             <hr>
-            <div class="form-group row">
+            <div class="form-group">
               <h5 class="col-sm-2 col-form-label">Default Python Version</h5>
               <div class="col-sm-10">
                 <p class="form-control-static">{{condaInfo.python_version}}</p>
               </div>
             </div>
             <hr>
-            <div class="form-group row">
+            <div class="form-group">
               <h5 class="col-sm-2 col-form-label">Conda-env Version</h5>
               <div class="col-sm-10">
                 <p class="form-control-static">{{condaInfo.conda_env_version}}</p>
               </div>
             </div>
             <hr>
-            <div class="form-group row">
+            <div class="form-group">
               <h5 class="col-sm-2 col-form-label">Env Directories</h5>
               <div class="col-sm-10">
                 <p class="form-control-static">{{condaInfo.envs_dirs[0]}}</p>
-              </div>
-            </div>
-            <hr>
-            <div class="form-group row">
-              <h5 class="col-sm-2 col-form-label">Root Location</h5>
-              <div class="col-sm-10">
-                <p class="form-control-static">{{condaInfo.root_prefix}}</p>
               </div>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save</button>
         </div>
       </div>
     </div>
