@@ -227,8 +227,19 @@ def create_yml(yml=None):
     Create new env from YAML file
     """
     if not yml:
-        raise TypeError('Must specify a name and yaml file location')
+        raise TypeError('Must specify a yaml file location')
     cmd_list    = ['env', 'create', '--file', yml]    
+    (out, err) = _call_conda(cmd_list)
+    return out
+
+
+def export_yml(name=None, yml=None):
+    """
+    Export conda env to yaml file
+    """
+    if not yml or not name:
+        raise TypeError('Must specify a yaml file location and name')
+    cmd_list    = ['env', 'export', '--file', yml, '--name', name]    
     (out, err) = _call_conda(cmd_list)
     return out
 

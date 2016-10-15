@@ -6,6 +6,7 @@ var _ = require('underscore');
 var fixPath = require('fix-path');
 var shelljs = require('shelljs');
 var app = require('electron').remote.app;
+var Dialog = require('electron').remote.dialog;
 fixPath();
 
 // Verify anaconda installation
@@ -36,6 +37,9 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
 
     // Set root prefix
     $scope.anacondaRoot = aPrefix;
+
+    // Set app version
+    $scope.appVersion = app.getVersion();
 
     // Function to quit the app
     $scope.quit = function(){
@@ -188,7 +192,7 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
     // Dialog for creating new YAML env
     $scope.openDialog = function() {
         $scope.createLoadingYml = true;
-        require('electron').remote.dialog.showOpenDialog({
+        Dialog.showOpenDialog({
             title: 'open YAML',
             properties: ['openFile'],
             buttonLabel: "Import",
@@ -208,6 +212,32 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
         });
     };
 
+    // Dialog for exporting env to YML
+    $scope.saveYAML = function(env) {
+      Dialog.showSaveDialog({defaultPath: env.prefix + '.yaml'}, function(fileName){
+        if (fileName === undefined){
+          console.log("No file save.");
+          return;
+        }
+        console.log("Saved environment to: ", fileName);
+        $scope.exportEnv(fileName, env.prefix);
+      });
+    };
+
+    // Function to export env
+    $scope.exportEnv= function(file, name){
+      pythonShell.run('export_env_yml.py',
+      {mode: 'json', args: [aPrefix, file, name]},
+      function (err, results) {
+        if (err) {
+          console.log("Export error:", err);
+          alert(err);
+          console.log("Export results:", results);
+        }
+        alert(name + " has been sucessfully saved.");
+        console.log("Exporting YAML environment, completed.");
+      });
+    };
 
     // Clear create-env form on cancel
     $scope.clearForm = function(){

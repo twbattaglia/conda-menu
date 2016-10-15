@@ -17,7 +17,7 @@
 <body ng-controller='mainCtrl'>
 
   <!-- Top navbar -->
-  <nav class="navbar navbar-dark navbar-fixed-top" style="background-color: #4183D7;">
+  <nav class="navbar navbar-dark navbar-fixed-top">
 
     <form class="form-inline">
       <div class="row">
@@ -33,21 +33,23 @@
     </form>
   </nav>
 
-  <div id="main-container">
+  <div class="container" style="padding-left:0em;padding-right:0em">
 
     <!-- Env listing -->
     <div class="list-group">
       <div class="list-group-item" ng-repeat="item in environments | filter:searchEnv | orderBy: 'prefix'">
         <span class="pull-xs-right">
-          <button ng-click="launch_env(item)" type="button" class="btn btn-outline-success" data-toggle="tooltip" data-placement="bottom" title="Launch">
-            <i class="icon ion-arrow-up-c" style="font-size:14px;"></i>
-          </button>
-          <button ng-click="getInfoModal(item)" type="button" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Info">
-            <i class="icon ion-information-circled" style="font-size:14px;"></i>
-          </button>
-          <button ng-click="removeEnvModal(item)" type="button" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="bottom" title="Delete">
-            <i class="icon ion-trash-b" style="font-size:14px;"></i>
-          </button>
+          <div class="btn-group" ng-class="{ 'dropup': $last && environments.length > 3}">
+            <button type="button" class="btn btn-secondary" ng-click="launch_env(item)">Launch</button>
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" style="font-size:14px;" ng-click="getInfoModal(item)"><i class="icon ion-information-circled"></i> Info</a>
+              <a class="dropdown-item" style="font-size:14px;" ng-click="saveYAML(item)"><i class="icon ion-ios-download"></i> Export</a>
+              <a class="dropdown-item" style="font-size:14px;" ng-click="removeEnvModal(item)"><i class="icon ion-trash-b"></i> Delete</a>
+            </div>
+          </div>
         </span>
         <h5>{{item.prefix}}</h5>
         <p style="color:#808080">{{item.version}}</p>
@@ -55,7 +57,7 @@
     </div>
 
     <!-- Footer listing -->
-    <nav class="navbar navbar-fixed-bottom navbar-light" id="footerBar">
+    <nav class="navbar navbar-fixed-bottom navbar-light">
       <button type="submit" class="btn btn-primary pull-xs-left" data-toggle="modal" data-target="#settingsModal">Settings</button>
       <button type="submit" class="btn btn-primary pull-xs-right" ng-click="quit()">Quit</button>
     </nav>
@@ -69,7 +71,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="clearForm()">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h5 class="modal-title">Create New Environment</h5>
+          <center><h5 class="modal-title">Create New Environment</h5></center>
         </div>
         <div class="modal-body">
           <form id="createEnvModalClear">
@@ -136,7 +138,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Creating Environment from YAML File</h5>
+          <center><h5 class="modal-title">Creating Environment from file</h5></center>
         </div>
         <div class="modal-body">
           <h5> Please wait...</h5>
@@ -154,10 +156,10 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h4 class="modal-title" id="myModalLabel">Remove environment</h4>
+          <h5 class="modal-title">Remove environment</h5>
         </div>
         <div class="modal-body">
-          <h5>Are you sure you would like to remove <b>{{removeEnvModalName}}</b>?</h5>
+          <center><p>Are you sure you would like to remove <b>{{removeEnvModalName}}</b>?</p></center>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -175,51 +177,30 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h4 class="modal-title">Settings</h4>
+          <center>
+            <h5 class="modal-title">Settings</h5>
+          </center>
         </div>
         <div class="modal-body">
           <form>
-            <div class="form-check">
-              <h5 class="form-check-label">
-                <input class="form-check-input" type="checkbox" ng-modal="checkboxModel">  Start app at login</input>
-                <small id="checkboxModelHelp" class="form-text text-muted">Conda-menu will launch at startup</small>
-              </h5>
+            <div class="form-group">
+              <h6>Conda-menu</h6>
+              <p class="form-control-static">{{appVersion}}</p>
             </div>
             <hr>
             <div class="form-group">
-              <div class="col-sm-10">
-                <div class="form-group">
-                  <button type="button" class="btn" ng-click="openDialog()">Default Program</button>
-                  <p id="launchWithAppHelp" class="form-text text-muted">Default app is Terminal</p>
-                </div>
-              </div>
+              <h6>Python</h6>
+              <p class="form-control-static">{{condaInfo.python_version}}</p>
             </div>
             <hr>
             <div class="form-group">
-              <h5 class="col-sm-2 col-form-label">Default Python Version</h5>
-              <div class="col-sm-10">
-                <p class="form-control-static">{{condaInfo.python_version}}</p>
-              </div>
-            </div>
-            <hr>
-            <div class="form-group">
-              <h5 class="col-sm-2 col-form-label">Conda-env Version</h5>
-              <div class="col-sm-10">
-                <p class="form-control-static">{{condaInfo.conda_env_version}}</p>
-              </div>
-            </div>
-            <hr>
-            <div class="form-group">
-              <h5 class="col-sm-2 col-form-label">Env Directories</h5>
-              <div class="col-sm-10">
-                <p class="form-control-static">{{condaInfo.envs_dirs[0]}}</p>
-              </div>
+              <h6>Conda</h6>
+              <p class="form-control-static">{{condaInfo.conda_env_version}}</p>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save</button>
         </div>
       </div>
     </div>

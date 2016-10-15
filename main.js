@@ -9,10 +9,11 @@ var opts = {
   icon: path.join(__dirname, '/build/IconTemplate.png'),
   resizable: false,
   movable: false,
-  alwaysOnTop: true,
+  alwaysOnTop: false,
   title: "Conda-menu",
-  width: 305,
-  height: 350
+  width: 300,
+  height: 350,
+  transparent: true
 };
 
 // set menubar
@@ -21,11 +22,10 @@ var mb = menubar(opts);
 // On ready
 mb.on('ready', function ready () {
   console.log('app is ready');
+  mb.tray.setToolTip('Conda Menu')
 })
 
 // After creation
 mb.on('after-create-window', function ready () {
   //mb.window.webContents.openDevTools() // debugging
-
-
 })

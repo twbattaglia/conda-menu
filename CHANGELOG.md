@@ -1,3 +1,7 @@
+### 0.1.2 (TBD)
+- added ability to export env to YAML file
+- collapsed individual buttons into a dropdown
+
 ### 0.1.1 (2016-10-14)
 - UI tweaks  
 - added tooltips to icons  
