@@ -6,7 +6,10 @@ An Electron based menubar app for creating and launching Conda virtual environme
 Download the latest version for your platform from [releases](https://github.com/twbattaglia/conda-menu/releases). Currently Conda-menu only supports macOS.
 
 ## Screenshots
-![Conda-menu Screenshot](build/screenshot.png)  
+![Conda-menu Screenshot](build/screenshot.png)    
+
+Drag .YML files into Conda-menu to create a new environment. See http://conda.pydata.org/docs/using/envs.html#share-an-environment for more information about creating/modifying conda environments.
+![Conda-menu Screenshot](build/drag.gif)  
 
 ## Requirements
 To load or create any new conda environments, you must have anaconda/miniconda installed first. If you do not have anaconda installed, see https://www.continuum.io/downloads#osx to download the GUI installation or run the command below to install miniconda through the command-line.

@@ -1,6 +1,9 @@
-### 0.1.2 (TBD)
+### 0.1.2 (2016-10-15)
 - added ability to export env to YAML file
 - collapsed individual buttons into a dropdown
+- minor UI tweaks to alerts and modals
+- changed settings modal until more features are added
+- fixed bug when dragging in YAML files
 
 ### 0.1.1 (2016-10-14)
 - UI tweaks  
