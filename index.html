@@ -37,7 +37,7 @@
 
     <!-- Env listing -->
     <div class="list-group">
-      <div class="list-group-item" ng-repeat="item in environments | filter:searchEnv | orderBy: 'prefix'">
+      <div ng-cloak class="list-group-item" ng-repeat="item in environments | filter:searchEnv | orderBy: 'prefix'">
         <span class="pull-xs-right">
           <div class="btn-group" ng-class="{ 'dropup': $last && environments.length > 3}">
             <button type="button" class="btn btn-secondary" ng-click="launch_env(item)">Launch</button>
@@ -209,7 +209,6 @@
   <!-- JS -->
   <script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
   <script type="text/javascript" src="./node_modules/angular/angular.min.js"></script>
-  <script type="text/javascript" src="./node_modules/angular-route/angular-route.min.js"></script>
 
   <script type="text/javascript" src="app/js/ladda/dist/spin.min.js"></script>
   <script type="text/javascript" src="app/js/ladda/dist/ladda.min.js"></script>

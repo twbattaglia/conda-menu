@@ -1,4 +1,3 @@
-var conda = require('conda');
 var pythonShell = require('python-shell');
 var childprocess = require('child_process');
 var path = require("path");
@@ -26,7 +25,7 @@ var appRoot = path.join(__dirname, 'app/cmd/');
 pythonShell.defaultOptions = { scriptPath: appRoot };
 
 // Initialize angular apply
-var ngApp = angular.module('ngApp', ['ngRoute', 'selectize', "angular-ladda"]);
+var ngApp = angular.module('ngApp', ['selectize', "angular-ladda"]);
 
 // Main Controller
 ngApp.controller('mainCtrl', ['$scope', '$location',
@@ -281,14 +280,14 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
 
     // Checkbox for settings
     $scope.checkboxModel = false;
+    
+    // Launch with settings
+    $scope.launchWithApp = "Terminal.app";
 
     // Run at app startup
     $scope.get_envs();
     $scope.get_installed();
     $scope.get_conda_info();
-
-    // Launch with settings
-    $scope.launchWithApp = "Terminal.app";
 
 }]); // End of main controller
 

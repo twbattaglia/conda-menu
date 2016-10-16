@@ -1,3 +1,6 @@
+### 0.1.3 (TBD)
+- fixed flicker on startup
+
 ### 0.1.2 (2016-10-15)
 - added ability to export env to YAML file
 - collapsed individual buttons into a dropdown

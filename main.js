@@ -1,12 +1,12 @@
 // Required modules
 var menubar = require('menubar');
-var path = require("path");
 
 // Initialize manubar
 var opts = {
   preloadWindow: true,
   showDockIcon: false,
-  icon: path.join(__dirname, '/build/IconTemplate.png'),
+  icon: __dirname + '/build/IconTemplate.png',
+  dir: __dirname,
   resizable: false,
   movable: false,
   alwaysOnTop: false,
