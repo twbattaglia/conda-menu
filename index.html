@@ -6,15 +6,17 @@
     <title></title>
     <link rel="stylesheet" href="app/css/bootstrap.min.css">
     <link rel="stylesheet" href="app/css/ionicons.min.css">
-
     <link rel="stylesheet" href="app/css/selectize.bootstrap3.min.css" />
-
     <link rel="stylesheet" href="app/js/ladda/dist/ladda-themeless.min.css">
-
     <link rel="stylesheet" href="app/css/custom.css">
 </head>
 
 <body ng-controller='mainCtrl'>
+
+  <!-- Overlay UI -->
+  <div id="dropoverlay" class="hidden">
+    Create new environment from YAML
+  </div>
 
   <!-- Top navbar -->
   <nav class="navbar navbar-dark navbar-fixed-top">
@@ -209,24 +211,13 @@
   <!-- JS -->
   <script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
   <script type="text/javascript" src="./node_modules/angular/angular.min.js"></script>
-
   <script type="text/javascript" src="app/js/ladda/dist/spin.min.js"></script>
   <script type="text/javascript" src="app/js/ladda/dist/ladda.min.js"></script>
   <script type="text/javascript" src="app/js/angular-ladda/dist/angular-ladda.min.js"></script>
-
   <script type="text/javascript" src="app/js/selectize.min.js"></script>
   <script type="text/javascript" src="app/js/angular-selectize.js"></script>
-
   <script type="text/javascript" src="app/js/tether.min.js"></script>
   <script type="text/javascript" src="app/js/bootstrap.min.js"></script>
-
   <script type="text/javascript" src="app/app.js"></script>
-
-  <script type="text/javascript">
-  $(document).ready(function(){
-      $('[data-toggle="tooltip"]').tooltip();
-  });
-  </script>
-
 </body>
 </html>

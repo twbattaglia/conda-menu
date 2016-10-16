@@ -8,35 +8,35 @@ body {
   background-color: #EEEEEE;
 }
 
+.hidden {
+  opacity: 0;
+  z-index: -1 !important;
+}
+
+#dropoverlay {
+  display: -ms-flexbox;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  text-align: center;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 1002;
+  font-size: 2em;
+  color: white;
+  background-color: #112233;
+  transition: all 5ms;
+}
+
 .list-group{
   margin-top: 40px;
   margin-bottom: 42px;
 }
 
-.styledItem{
-  border-color: #4183D7;
-  border-width: thin;
-}
-
 .dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-  display: none;
-  float: left;
   min-width: 105px;
-  padding: 5px 0;
-  margin: 2px 0 0;
-  font-size: 1rem;
-  color: #373a3c;
-  text-align: left;
-  list-style: none;
-  background-color: #fff;
-  -webkit-background-clip: padding-box;
-          background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 0.25rem;
 }
 
 .navbar-fixed-bottom {
@@ -46,22 +46,9 @@ body {
 
 .navbar-fixed-top{
   background-color: #4183D7;
+  z-index: 1001;
 }
 
 .list-group-item{
   padding-bottom: 0px;
-}
-
-.file-hover {
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 1 !important;
-  background-color: black;
-  filter: alpha(opacity=40); /* internet explorer */
-  -khtml-opacity: 0.40;      /* khtml, old safari */
-    -moz-opacity: 0.40;      /* mozilla, netscape */
-         opacity: 0.40;      /* fx, safari, opera */
 }

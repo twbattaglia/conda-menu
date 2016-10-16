@@ -149,13 +149,13 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
 
     // Functions to create YML when file is dragged into app
     document.body.ondragover = function(e) {
-      $('body').addClass('file-hover');
+      document.getElementById('dropoverlay').className = "";
       e.preventDefault();
       e.dataTransfer.dropEffect = 'copy';
       return false;
     };
     document.body.ondrop = function(ev) {
-      $('body').removeClass('file-hover');
+      document.getElementById('dropoverlay').className = "hidden";
       var file_path = ev.dataTransfer.files[0].path;
       console.log(file_path);
       $('#createEnvYamlModal').modal('show');
@@ -163,7 +163,7 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
       ev.preventDefault();
     };
     document.body.ondragleave = function () {
-      $('body').removeClass('file-hover');
+      document.getElementById('dropoverlay').className = "hidden";
       return false;
     };
 
@@ -280,7 +280,7 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
 
     // Checkbox for settings
     $scope.checkboxModel = false;
-    
+
     // Launch with settings
     $scope.launchWithApp = "Terminal.app";
 
