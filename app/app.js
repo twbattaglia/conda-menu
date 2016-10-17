@@ -6,11 +6,13 @@ var fixPath = require('fix-path');
 var shelljs = require('shelljs');
 var app = require('electron').remote.app;
 var Dialog = require('electron').remote.dialog;
+var Shell = require('electron').remote.shell;
 fixPath();
 
 // Verify anaconda installation
 if (!shelljs.which('conda')) {
   confirm("Conda installation could not be found! Please install anaconda or miniconda before running again!");
+  Shell.openExternal('https://www.continuum.io/downloads');
   app.quit();
 }
 
