@@ -1,4 +1,4 @@
-### 0.2.1 (TBD)
+### 0.2.1 (2016-10-18)
 - added option to set auto launch at system start up
 - UI changes
 - added more information in settings modal
