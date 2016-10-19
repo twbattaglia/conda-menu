@@ -5,6 +5,9 @@
   "description": "An Electron based menubar app for creating and launching conda virtual environments.",
   "dependencies": {
     "angular": "^1.5.8",
+    "angular-animate": "^1.5.8",
+    "auto-launch": "^5.0.1",
+    "electron-json-config": "^1.4.0",
     "fix-path": "^2.0.0",
     "jquery": "^3.1.0",
     "menubar": "^5.0.0",

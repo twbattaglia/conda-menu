@@ -1,3 +1,9 @@
+### 0.2.1 (TBD)
+- added option to set auto launch at system start up
+- UI changes
+- added more information in settings modal
+- fixed drop overlap fading speed
+
 ### 0.2.0 (2016-10-16)
 - fixed flicker on startup
 - added ability to export env to YAML file

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="app/css/selectize.bootstrap3.min.css" />
     <link rel="stylesheet" href="app/js/ladda/dist/ladda-themeless.min.css">
     <link rel="stylesheet" href="app/css/custom.css">
+
 </head>
 
 <body ng-controller='mainCtrl'>
@@ -20,14 +21,13 @@
 
   <!-- Top navbar -->
   <nav class="navbar navbar-dark navbar-fixed-top">
-
     <form class="form-inline">
       <div class="row">
         <div class="col-xs-8">
           <input type="text" class="form-control" placeholder="Search..." ng-model="searchEnv">
         </div>
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary pull-xs-left" data-toggle="modal" data-target="#createEnvModal">
+          <button type="submit" class="btn btn-secondary pull-xs-left" data-toggle="modal" data-target="#createEnvModal">
             Create
           </button>
         </div>
@@ -35,11 +35,12 @@
     </form>
   </nav>
 
+  <!-- Main container -->
   <div class="container" style="padding-left:0em;padding-right:0em">
 
     <!-- Env listing -->
     <div class="list-group">
-      <div ng-cloak class="list-group-item" ng-repeat="item in environments | filter:searchEnv | orderBy: 'prefix'">
+      <div ng-cloak class="list-group-item item" ng-repeat="item in environments | filter:searchEnv | orderBy: 'prefix'">
         <span class="pull-xs-right">
           <div class="btn-group" ng-class="{ 'dropup': $last && environments.length > 3}">
             <button type="button" class="btn btn-secondary" ng-click="launch_env(item)">Launch</button>
@@ -47,9 +48,15 @@
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" style="font-size:14px;" ng-click="getInfoModal(item)"><i class="icon ion-information-circled"></i> Info</a>
-              <a class="dropdown-item" style="font-size:14px;" ng-click="saveYAML(item)"><i class="icon ion-ios-download"></i> Export</a>
-              <a class="dropdown-item" style="font-size:14px;" ng-click="removeEnvModal(item)"><i class="icon ion-trash-b"></i> Delete</a>
+              <a class="dropdown-item" style="font-size:13px;" ng-click="getInfoModal(item)">
+                <span class="icon ion-information-circled"></span> Info
+              </a>
+              <a class="dropdown-item" style="font-size:13px;" ng-click="saveYAML(item)">
+                <span class="icon ion-ios-download"> Export</span>
+              </a>
+              <a class="dropdown-item" style="font-size:13px;" ng-click="removeEnvModal(item)">
+                <span class="icon ion-trash-b"></span> Delete
+              </a>
             </div>
           </div>
         </span>
@@ -60,8 +67,8 @@
 
     <!-- Footer listing -->
     <nav class="navbar navbar-fixed-bottom navbar-light">
-      <button type="submit" class="btn btn-primary pull-xs-left" data-toggle="modal" data-target="#settingsModal">Settings</button>
-      <button type="submit" class="btn btn-primary pull-xs-right" ng-click="quit()">Quit</button>
+      <button type="submit" class="btn btn-secondary pull-xs-right" data-toggle="modal" data-target="#settingsModal">Settings</button>
+      <button type="submit" class="btn btn-secondary pull-xs-left" ng-click="quit()">Quit</button>
     </nav>
   </div>
 
@@ -73,7 +80,9 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="clearForm()">
             <span aria-hidden="true">&times;</span>
           </button>
-          <center><h5 class="modal-title">Create New Environment</h5></center>
+          <center>
+            <p class="lead">Create New Environment</p>
+          </center>
         </div>
         <div class="modal-body">
           <form id="createEnvModalClear">
@@ -113,7 +122,9 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h5 class="modal-title">{{getInfoName}}</h5>
+          <center>
+            <p class="lead">{{getInfoName}}</p>
+          </center>
         </div>
         <div class="modal-body">
           <table class="table table-sm table-hover">
@@ -140,15 +151,16 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <center><h5 class="modal-title">Creating environment from file</h5></center>
+          <center>
+            <p class="lead">Create Environment from File</p>
+          </center>
         </div>
         <div class="modal-body">
           <h5> Please wait...</h5>
         </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-
+      </div>
+    </div>
+  </div>
 
   <!-- Remove env modal -->
   <div class="modal fade" id="envDeleteModal" tabindex="-1" role="dialog" aria-labelledby="envDeleteModal" aria-hidden="true">
@@ -158,10 +170,10 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <center><h5 class="modal-title">Remove environment</h5></center>
+          <center><p class="lead">Remove Environment</p></center>
         </div>
         <div class="modal-body">
-          <center><p>Are you sure you would like to remove <b>{{removeEnvModalName}}</b>?</p></center>
+          <center><h5>Are you sure you would like to remove <b>{{removeEnvModalName}}</b>?</h5></center>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -180,26 +192,34 @@
             <span aria-hidden="true">&times;</span>
           </button>
           <center>
-            <h5 class="modal-title">Settings</h5>
+            <p class="lead">Settings</p>
           </center>
         </div>
         <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <h6>Conda-menu</h6>
-              <p class="form-control-static">{{appVersion}}</p>
-            </div>
+          <form name="myForm">
+            <p class="lead">System</p>
             <hr>
-            <div class="form-group">
-              <h6>Python</h6>
-              <p class="form-control-static">{{condaInfo.python_version}}</p>
-            </div>
+            <input type="checkbox" ng-model="checkboxModel" data-ng-change="checkboxModel ? setTrue() : setFalse()">
+            <label for="checkbox"> Start application at system startup</label>
+            <br>
+            <br>
+            <p class="lead">Versions</p>
             <hr>
-            <div class="form-group">
-              <h6>Conda</h6>
-              <p class="form-control-static">{{condaInfo.conda_env_version}}</p>
-            </div>
-          </form>
+            <ul class="list-inline">
+              <li class="list-inline-item"><h6>Conda-menu</h6></li>
+              <li class="list-inline-item pull-xs-right"><p style="color:#808080">{{appVersion}}</p></li>
+            </ul>
+            <hr>
+            <ul class="list-inline">
+              <li class="list-inline-item"><h6>System Python</h6></li>
+              <li class="list-inline-item pull-xs-right"><p style="color:#808080">{{condaInfo.python_version}}</p></li>
+            </ul>
+            <hr>
+            <ul class="list-inline">
+              <li class="list-inline-item"><h6>Conda-env</h6></li>
+              <li class="list-inline-item pull-xs-right"><p style="color:#808080">{{condaInfo.conda_env_version}}</p></li>
+            </ul>
+           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -211,6 +231,7 @@
   <!-- JS -->
   <script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
   <script type="text/javascript" src="./node_modules/angular/angular.min.js"></script>
+  <script type="text/javascript" src="./node_modules/angular-animate/angular-animate.min.js"></script>
   <script type="text/javascript" src="app/js/ladda/dist/spin.min.js"></script>
   <script type="text/javascript" src="app/js/ladda/dist/ladda.min.js"></script>
   <script type="text/javascript" src="app/js/angular-ladda/dist/angular-ladda.min.js"></script>

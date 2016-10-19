@@ -13,6 +13,12 @@ body {
   z-index: -1 !important;
 }
 
+.modal .modal-header {
+  background-color: #2980B9;
+  color: #ffffff;
+  padding-bottom: 0em;
+}
+
 #dropoverlay {
   display: -ms-flexbox;
   -ms-flex-pack: center;
@@ -23,11 +29,11 @@ body {
   position: fixed;
   height: 100%;
   width: 100%;
-  z-index: 1002;
+  z-index: 10000;
   font-size: 2em;
   color: white;
   background-color: #112233;
-  transition: all 5ms;
+  transition: all 100ms;
 }
 
 .list-group{
@@ -40,15 +46,44 @@ body {
 }
 
 .navbar-fixed-bottom {
-  background-color: #4183D7;
-  z-index: 1001;
+  background-color: #2980B9;
+  z-index: 1000;
 }
 
 .navbar-fixed-top{
-  background-color: #4183D7;
-  z-index: 1001;
+  background-color: #2980B9;
+  z-index: 1000;
 }
 
 .list-group-item{
   padding-bottom: 0px;
+}
+
+.item { }
+
+.item.ng-move,
+.item.ng-enter,
+.item.ng-leave {
+  -webkit-transition: 200ms cubic-bezier(0.250, 0.100, 0.250, 1.000) all;
+  -moz-transition: 200ms cubic-bezier(0.250, 0.100, 0.250, 1.000) all;
+  -ms-transition: 200ms cubic-bezier(0.250, 0.100, 0.250, 1.000) all;
+  -o-transition: 200ms cubic-bezier(0.250, 0.100, 0.250, 1.000) all;
+  transition: 200ms cubic-bezier(0.250, 0.100, 0.250, 1.000) all;
+  position: relative;
+  display: block;
+  overflow: hidden;
+  text-overflow: clip;
+  white-space:nowrap;
+}
+
+.item.ng-leave.ng-leave-active,
+.item.ng-move,
+.item.ng-enter {
+  opacity: 0;
+}
+
+.item.ng-leave,
+.item.ng-move.ng-move-active,
+.item.ng-enter.ng-enter-active {
+  opacity: 1;
 }

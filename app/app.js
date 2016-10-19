@@ -7,7 +7,16 @@ var shelljs = require('shelljs');
 var app = require('electron').remote.app;
 var Dialog = require('electron').remote.dialog;
 var Shell = require('electron').remote.shell;
+var AutoLaunch = require('auto-launch');
+var config = require('electron-json-config');
+
+// fix path for macOS
 fixPath();
+
+// launch app at startup
+var condaMenuAutoLauncher = new AutoLaunch({
+    name: 'Conda-menu'
+});
 
 // Verify anaconda installation
 if (!shelljs.which('conda')) {
@@ -27,7 +36,16 @@ var appRoot = path.join(__dirname, 'app/cmd/');
 pythonShell.defaultOptions = { scriptPath: appRoot };
 
 // Initialize angular apply
-var ngApp = angular.module('ngApp', ['selectize', "angular-ladda"]);
+var ngApp = angular.module('ngApp', ['selectize', "angular-ladda", 'ngAnimate']);
+
+// Global settings for ladda spinner
+ngApp.config(function (laddaProvider) {
+    laddaProvider.setOption({
+      style: 'expand-left',
+      spinnerSize: 14,
+      spinnerColor: '#ffffff'
+    });
+});
 
 // Main Controller
 ngApp.controller('mainCtrl', ['$scope', '$location',
@@ -189,7 +207,6 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
       });
     };
 
-
     // Dialog for creating new YAML env
     $scope.openDialog = function() {
         $scope.createLoadingYml = true;
@@ -280,11 +297,36 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
       $('#envInfoModal').modal('show');
     };
 
-    // Checkbox for settings
-    $scope.checkboxModel = false;
+    // First check to see if user settings exist.
+    // If no, set default
+    // If yes, read in settings and apply to scope
+    //config.set('autoLaunch', true);
+    console.log("Autolaunch set to: " + config.get('autoLaunch'));
 
-    // Launch with settings
-    $scope.launchWithApp = "Terminal.app";
+    // Look for config, and if not set, set default to false
+    if(config.get('autoLaunch') === undefined){
+      $scope.checkboxModel = false;
+    } else if (config.get('autoLaunch') === true) {
+      $scope.checkboxModel = true;
+    } else if (config.get('autoLaunch') === false) {
+      $scope.checkboxModel = false;
+    }
+
+    // Set config to false
+    $scope.setFalse = function(){
+      condaMenuAutoLauncher.disable();
+      console.log("disabled autolaunch");
+      config.set('autoLaunch', false);
+      $scope.checkboxModel = false;
+    };
+
+    // Set config to true
+    $scope.setTrue = function(){
+      condaMenuAutoLauncher.enable();
+      console.log("enabled autolaunch");
+      config.set('autoLaunch', true);
+      $scope.checkboxModel = true;
+    };
 
     // Run at app startup
     $scope.get_envs();
@@ -292,13 +334,3 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
     $scope.get_conda_info();
 
 }]); // End of main controller
-
-
-// Global settings for ladda spinner
-ngApp.config(function (laddaProvider) {
-    laddaProvider.setOption({
-      style: 'expand-left',
-      spinnerSize: 14,
-      spinnerColor: '#ffffff'
-    });
-});
