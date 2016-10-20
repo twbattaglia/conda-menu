@@ -1,5 +1,5 @@
 # Conda-menu
-An Electron based menubar app for creating and launching Conda virtual environments.  
+An (unofficial) Electron based menubar app for creating and launching Conda virtual environments.  
 [![Build Status](https://travis-ci.org/twbattaglia/conda-menu.svg?branch=master)](https://travis-ci.org/twbattaglia/conda-menu)  
 
 Drag (.YML) files into Conda-menu to create a new environment. See http://conda.pydata.org/docs/using/envs.html#share-an-environment for more information about creating/modifying conda environments.  
@@ -51,8 +51,11 @@ App Icon: Ouroboros by Silas Reeves from the Noun Project
 - [x] add option to import requirements.yaml file during new env creation  
 - [ ] upload env's to anaconda
 - [x] export env's to YML
+- [x] clone env's
 - [ ] change/set default Terminal program
 - [ ] add new anaconda channels
-- [ ] option to open app at startup
+- [x] option to open app at startup
 - [ ] github auto-updates
 - [ ] add homebrew installation
+- [ ] start env python session
+- [ ] add support for linux/windows

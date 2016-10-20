@@ -49,13 +49,16 @@
             </button>
             <div class="dropdown-menu">
               <a class="dropdown-item" style="font-size:13px;" ng-click="getInfoModal(item)">
-                <span class="icon ion-information-circled"></span> Info
+                <span class="icon ion-information-circled"> Info </span>
               </a>
               <a class="dropdown-item" style="font-size:13px;" ng-click="saveYAML(item)">
-                <span class="icon ion-ios-download"> Export</span>
+                <span class="icon ion-log-in"> Export</span>
+              </a>
+              <a class="dropdown-item" style="font-size:13px;" ng-click="cloneEnvModal(item)">
+                <span class="icon ion-ios-copy"> Clone</span>
               </a>
               <a class="dropdown-item" style="font-size:13px;" ng-click="removeEnvModal(item)">
-                <span class="icon ion-trash-b"></span> Delete
+                <span class="icon ion-trash-b"> Delete</span>
               </a>
             </div>
           </div>
@@ -178,6 +181,36 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-danger" ladda="removeLoading" ng-click="remove_env(removeEnvModalName)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Clone env modal -->
+  <div class="modal fade" id="cloneEnvModal" tabindex="-1" role="dialog" aria-labelledby="cloneEnvModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <center>
+            <p class="lead">Clone {{cloneEnvModalName}}</p>
+          </center>
+        </div>
+        <div class="modal-body">
+          <form id="cloneEnvForm">
+            <div class="form-group">
+              <b>Environment name</b>
+              <input type="text" class="form-control" id="cloneEnv" aria-describedby="Name" placeholder="" ng-model="newCloneEnvName">
+              <p class="form-text text-muted">Enter an environment name for the copy of {{cloneEnvModalName}}.</p>
+            </div>
+            {{test}}
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" ladda="cloneLoading" ng-click="clone_env(newCloneEnvName, cloneEnvModalName)">Create</button>
         </div>
       </div>
     </div>

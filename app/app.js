@@ -230,6 +230,33 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
         });
     };
 
+    // Create modal for cloning conda-env
+    $scope.cloneEnvModal = function(envName){
+      $scope.cloneEnvModalName = envName.prefix;
+      $('#cloneEnvModal').modal('show');
+    };
+
+    // Cloned environment function
+    $scope.clone_env = function(name, env){
+      $scope.cloneLoading = true;
+      console.log("Cloning environment", env, "into ", name);
+      pythonShell.run('clone_env.py',
+      {mode: 'json', args: [aPrefix, name, env]},
+      function (err, results) {
+        if (err) {
+          console.log("Cloned error:", err);
+          console.log("Cloned results:", results);
+        }
+        $scope.get_envs();
+        console.log("Cloned environment", name, "created..");
+        $scope.cloneLoading = false;
+        $('#cloneEnvModal').modal('hide');
+        $('#cloneEnvModal').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset');
+        });
+      });
+    };
+
     // Dialog for exporting env to YML
     $scope.saveYAML = function(env) {
       Dialog.showSaveDialog({defaultPath: env.prefix + '.yaml'}, function(fileName){
@@ -243,7 +270,7 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
     };
 
     // Function to export env
-    $scope.exportEnv= function(file, name){
+    $scope.exportEnv = function(file, name){
       pythonShell.run('export_env_yml.py',
       {mode: 'json', args: [aPrefix, file, name]},
       function (err, results) {

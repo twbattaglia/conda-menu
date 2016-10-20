@@ -1,3 +1,6 @@
+### 0.2.2 (TBD)
+- added dropdown option to clone environment
+
 ### 0.2.1 (2016-10-18)
 - added option to set auto launch at system start up
 - UI changes

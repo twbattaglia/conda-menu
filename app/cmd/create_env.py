@@ -5,11 +5,6 @@ import json
 import sys
 import re
 
-class SetEncoder(json.JSONEncoder):
-	def default(self, obj):
-		if isinstance(obj, set):
-			return list(obj)
-		return json.JSONEncoder.default(self, obj)
 
 def main(prefix, name, version, pkgs):
 
