@@ -20,14 +20,14 @@
   </div>
 
   <!-- Top navbar -->
-  <nav class="navbar navbar-dark navbar-fixed-top">
+  <nav class="navbar navbar-fixed-top">
     <form class="form-inline">
       <div class="row">
-        <div class="col-xs-8">
+        <div class="col-xs-7">
           <input type="text" class="form-control" placeholder="Search..." ng-model="searchEnv">
         </div>
-        <div class="col-xs-4">
-          <button type="submit" class="btn btn-secondary pull-xs-left" data-toggle="modal" data-target="#createEnvModal">
+        <div class="col-xs-5">
+          <button type="submit" class="btn btn-secondary pull-xs-right" data-toggle="modal" data-target="#createEnvModal">
             Create
           </button>
         </div>
@@ -40,7 +40,7 @@
 
     <!-- Env listing -->
     <div class="list-group">
-      <div ng-cloak class="list-group-item item" ng-repeat="item in environments | filter:searchEnv | orderBy: 'prefix'">
+      <div ng-cloak class="list-group-item item list-group-item-action" ng-repeat="item in environments | filter:searchEnv | orderBy: 'prefix'">
         <span class="pull-xs-right">
           <div class="btn-group" ng-class="{ 'dropup': $last && environments.length > 3}">
             <button type="button" class="btn btn-secondary" ng-click="launch_env(item)">Launch</button>
@@ -49,21 +49,21 @@
             </button>
             <div class="dropdown-menu">
               <a class="dropdown-item" style="font-size:13px;" ng-click="getInfoModal(item)">
-                <span class="icon ion-information-circled"> Info </span>
+                <span class="icon ion-information" style="padding-right:0.75em; font-size:16px;"></span>  Info
               </a>
               <a class="dropdown-item" style="font-size:13px;" ng-click="saveYAML(item)">
-                <span class="icon ion-log-in"> Export</span>
+                <span class="icon ion-ios-upload" style="padding-right:0.5em; font-size:16px;"></span> Export
               </a>
               <a class="dropdown-item" style="font-size:13px;" ng-click="cloneEnvModal(item)">
-                <span class="icon ion-ios-copy"> Clone</span>
+                <span class="icon ion-ios-copy" style="padding-right:0.5em; font-size:16px;"></span> Clone
               </a>
               <a class="dropdown-item" style="font-size:13px;" ng-click="removeEnvModal(item)">
-                <span class="icon ion-trash-b"> Delete</span>
+                <span class="icon ion-trash-b" style="padding-right:0.5em; font-size:16px;"></span> Delete
               </a>
             </div>
           </div>
         </span>
-        <h5>{{item.prefix}}</h5>
+        <h4>{{item.prefix}}</h4>
         <p style="color:#808080">{{item.version}}</p>
       </div>
     </div>
@@ -98,6 +98,7 @@
               <select class="form-control" id="pythonVersion" ng-model="newEnvVersion">
                 <option>3.5</option>
                 <option>3.4</option>
+                <option>3.3</option>
                 <option>2.7</option>
                 <option>2.6</option>
               </select>
@@ -145,6 +146,9 @@
             </tbody>
           </table>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
@@ -155,7 +159,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <center>
-            <p class="lead">Create Environment from File</p>
+            <p class="lead">Create environment from file</p>
           </center>
         </div>
         <div class="modal-body">
@@ -169,7 +173,7 @@
   <div class="modal fade" id="envDeleteModal" tabindex="-1" role="dialog" aria-labelledby="envDeleteModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header" style="background-color: #B23641">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -220,7 +224,7 @@
   <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header" style="background-color: #444444;">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -232,8 +236,8 @@
           <form name="myForm">
             <p class="lead">System</p>
             <hr>
-            <input type="checkbox" ng-model="checkboxModel" data-ng-change="checkboxModel ? setTrue() : setFalse()">
-            <label for="checkbox"> Start application at system startup</label>
+            <input type="checkbox" style="size:20px;" ng-model="checkboxModel" data-ng-change="checkboxModel ? setTrue() : setFalse()">
+            <label for="checkbox" style="padding-left:0.5em;"> Start application at system startup</label>
             <br>
             <br>
             <p class="lead">Versions</p>

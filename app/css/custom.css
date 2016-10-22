@@ -1,11 +1,35 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url('app/fonts/Lato-Regular.ttf');
 
 html {
-  font: 12px "Roboto", Helvetica, Arial, sans-serif;
+  font-size: 12px;
 }
 
 body {
+  font-family: 'Lato', sans-serif;
   background-color: #EEEEEE;
+}
+
+.btn {
+    letter-spacing: 1px;
+}
+
+.cm-blue1 {
+  background-color: ##73B1D6;
+}
+.cm-blue2 {
+  background-color: #4589B0;
+}
+.cm-blue3 {
+  background-color: #1D628B;
+}
+.cm-white1 {
+  background-color: #FFFFF7;
+}
+.cm-dark {
+  background-color: #444444;
+}
+.cm-red {
+  color: #B23641;
 }
 
 .hidden {
@@ -14,7 +38,7 @@ body {
 }
 
 .modal .modal-header {
-  background-color: #2980B9;
+  background-color: #4589B0;
   color: #ffffff;
   padding-bottom: 0em;
 }
@@ -32,8 +56,8 @@ body {
   z-index: 1000;
   font-size: 2em;
   color: white;
-  background-color: #112233;
-  transition: all 200ms;
+  background-color: #444444;
+  transition: all 250ms;
 }
 
 .list-group{
@@ -43,16 +67,16 @@ body {
 }
 
 .dropdown-menu {
-  min-width: 105px;
+  min-width: 106px;
 }
 
 .navbar-fixed-bottom {
-  background-color: #2980B9;
+  background-color: #1D628B;
   z-index: 9;
 }
 
 .navbar-fixed-top{
-  background-color: #2980B9;
+  background-color: #1D628B;
   z-index: 9;
 }
 

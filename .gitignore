@@ -45,3 +45,5 @@ dist/conda-menu-mac.zip
 app/cmd/testing.py
 
 dev/
+
+build/Conda-menu*
