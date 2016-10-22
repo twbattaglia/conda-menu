@@ -1,8 +1,9 @@
-### 0.2.2 (TBD)
+### 0.2.2 (2016-10-22)
 - added dropdown option to clone environment
 - changed fonts
 - changed UI colors
 - changed modal colors
+- fixed button outline color
 
 ### 0.2.1 (2016-10-18)
 - added option to set auto launch at system start up
