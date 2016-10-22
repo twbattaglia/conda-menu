@@ -12,6 +12,9 @@ body {
 .btn {
     letter-spacing: 1px;
 }
+.btn:focus,.btn:active {
+   outline: none !important;
+}
 
 .cm-blue1 {
   background-color: ##73B1D6;
