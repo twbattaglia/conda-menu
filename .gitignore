@@ -47,3 +47,5 @@ app/cmd/testing.py
 dev/
 
 build/Conda-menu*
+
+*.deb

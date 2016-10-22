@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "electron-builder": "latest",
+    "electron-installer-debian": "^0.4.0",
     "electron-packager": "latest",
     "electron-prebuilt": "latest",
     "electron-rebuild": "latest",
@@ -32,9 +33,11 @@
     "test": "node_modules/jshint/bin/jshint ./app/app.js",
     "start": "electron . --enable-logging",
     "dev": "NODE_ENV='development' npm run start",
-    "build": "electron-packager . Conda-menu --platform=darwin --out build --version=1.4.3 --icon=build/Icon.icns --overwrite",
-    "clean": "rm -rf build/Conda-menu-darwin-x64 | rm -rf dist/*",
-    "compress": "bash build/compress",
-    "release": "npm run build && npm run compress"
+    "clean": "rm -rf build/Conda-menu-* | rm -rf dist/*",
+
+    "osx": "electron-packager . Conda-menu --platform darwin --out build --version=1.4.3 --icon=build/Icon.icns --overwrite",
+    "zip64": "bash build/compress.sh",
+
+    "build": "npm run clean && npm run osx && npm run zip64"
   }
 }

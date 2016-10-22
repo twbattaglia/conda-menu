@@ -1,24 +1,44 @@
-# Conda-menu
-An (unofficial) Electron based menubar app for creating and launching Conda virtual environments.  
-[![Build Status](https://travis-ci.org/twbattaglia/conda-menu.svg?branch=master)](https://travis-ci.org/twbattaglia/conda-menu)  
+<h1 align="center">
+  <br>
+  <img src="build/Conda-menu.png" alt="Condamenu" width="200"></a>
+  <br>
+    Conda-menu
+  <br>
+  <br>
+</h1>
+<h4 align="center">An (unofficial) menubar app for creating and launching conda virtual environments.</h4>
+<p align="center">
+  <a href="https://travis-ci.org/twbattaglia/conda-menu"><img src="https://travis-ci.org/twbattaglia/conda-menu.svg?branch=master" alt="Travis"></a>
+  <a href="https://github.com/twbattaglia/conda-menu/releases"><img src="https://img.shields.io/github/release/twbattaglia/conda-menu.svg" alt="Release"></a>
+</p>
 
-Drag (.YML) files into Conda-menu to create a new environment. See http://conda.pydata.org/docs/using/envs.html#share-an-environment for more information about creating/modifying conda environments.  
+## Install
+Download the latest version for your platform from [releases](https://github.com/twbattaglia/conda-menu/releases).
+Currently **Conda-menu** only supports macOS and is under very active development.
 
-![Conda-menu Screenshot](build/drag.gif)  
 
-## Installation
-Download the latest version for your platform from [releases](https://github.com/twbattaglia/conda-menu/releases). Currently Conda-menu only supports macOS.
+## Screenshots
+<p align="center">
+  <hr>
+  <img src="build/screenshots/screenshot-main.png" alt="screenshot" align="center" height="300px" width="300px"> 
+  <hr>
+  <img src="build/screenshots/screenshot-create.png" alt="screenshot" align="center" height="300px" width="300px">
+  <hr>
+  <img src="build/screenshots/screenshot-delete.png" alt="screenshot" align="center" height="300px" width="300px">
+  <hr>
+  <img src="build/screenshots/screenshot-drag.gif" alt="screenshot" align="center" height="400px" width="400px">
+</p>
 
 ## Requirements
 To load or create any new conda environments, you must have anaconda/miniconda installed first. If you do not have anaconda installed, see https://www.continuum.io/downloads#osx to download the GUI installation or run the command below to install miniconda through the command-line.
-```bash
+```
 # Download Python 3.6
 curl https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
-bash Miniconda3-latest-MacOSX-x86_64.sh -b
+bash Miniconda3-latest-MacOSX-x86_64.sh
 
 # Download Python 2.7
 curl https://repo.continuum.io/miniconda/Miniconda2-latest-MacOSX-x86_64.sh
-bash Miniconda2-latest-MacOSX-x86_64.sh -b
+bash Miniconda2-latest-MacOSX-x86_64.sh
 ```
 
 ## Development
@@ -57,5 +77,5 @@ App Icon: Ouroboros by Silas Reeves from the Noun Project
 - [x] option to open app at startup
 - [ ] github auto-updates
 - [ ] add homebrew installation
-- [ ] start env python session
-- [ ] add support for linux/windows
+- [ ] add support for linux
+- [ ] add support for windows
