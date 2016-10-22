@@ -20,22 +20,22 @@ Currently **Conda-menu** only supports macOS and is under very active developmen
 ## Screenshots
 <div align="center">
   <br>
-  <img src="build/screenshots/screenshot-drag.gif" alt="screenshot" align="center">
-  <br>
   <img src="build/screenshots/screenshot-main.png" alt="screenshot" align="center">
   <br>
   <img src="build/screenshots/screenshot-create.png" alt="screenshot" align="center">
   <br>
+  <img src="build/screenshots/screenshot-delete.png" alt="screenshot" align="center">
+  <br>
   <img src="build/screenshots/screenshot-clone.png" alt="screenshot" align="center">
   <br>
-  <img src="build/screenshots/screenshot-delete.png" alt="screenshot" align="center">
+  <img src="build/screenshots/screenshot-drag.gif" alt="screenshot" align="center">
   <br>
 </div>
 
 ## Requirements
-To load or create any new conda environments, you must have anaconda/miniconda installed first. If you do not have anaconda installed, see https://www.continuum.io/downloads#osx to download the GUI installation or run the command below to install miniconda through the command-line.
+To load or create any new conda environments, you must have anaconda/miniconda installed first. If you do not have anaconda installed, see https://www.continuum.io/downloads#osx to download the GUI installation or run the command below to install miniconda.
 ```
-# Download Python 3.6
+# Download Python 3.5
 curl https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
 bash Miniconda3-latest-MacOSX-x86_64.sh
 
@@ -46,7 +46,7 @@ bash Miniconda2-latest-MacOSX-x86_64.sh
 
 ## Development
 ```bash
-# Install latest Electron (if needed)
+# Install latest Electron
 npm install electron -g
 
 # Download latest directory
@@ -58,7 +58,7 @@ cd conda-menu/
 # Install npm packages
 npm install
 
-# start app
+# Start app
 npm run dev
 ```
 
@@ -72,12 +72,12 @@ App Icon: Ouroboros by Silas Reeves from the Noun Project
 ## Future features
 - [x] validate conda installation
 - [x] add option to import requirements.yaml file during new env creation  
-- [ ] upload env's to anaconda
 - [x] export env's to YML
 - [x] clone env's
+- [x] option to open app at startup
+- [ ] upload env's to anaconda
 - [ ] change/set default Terminal program
 - [ ] add new anaconda channels
-- [x] option to open app at startup
 - [ ] github auto-updates
 - [ ] add homebrew installation
 - [ ] add support for linux
