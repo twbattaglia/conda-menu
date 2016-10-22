@@ -34,10 +34,8 @@
     "start": "electron . --enable-logging",
     "dev": "NODE_ENV='development' npm run start",
     "clean": "rm -rf build/Conda-menu-* | rm -rf dist/*",
-
     "osx": "electron-packager . Conda-menu --platform darwin --out build --version=1.4.3 --icon=build/Icon.icns --overwrite",
     "zip64": "bash build/compress.sh",
-
     "build": "npm run clean && npm run osx && npm run zip64"
   }
 }

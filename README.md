@@ -18,16 +18,19 @@ Currently **Conda-menu** only supports macOS and is under very active developmen
 
 
 ## Screenshots
-<p align="center">
-  <hr>
-  <img src="build/screenshots/screenshot-main.png" alt="screenshot" align="center" height="300px" width="300px"> 
-  <hr>
-  <img src="build/screenshots/screenshot-create.png" alt="screenshot" align="center" height="300px" width="300px">
-  <hr>
-  <img src="build/screenshots/screenshot-delete.png" alt="screenshot" align="center" height="300px" width="300px">
-  <hr>
-  <img src="build/screenshots/screenshot-drag.gif" alt="screenshot" align="center" height="400px" width="400px">
-</p>
+<div align="center">
+  <br>
+  <img src="build/screenshots/screenshot-drag.gif" alt="screenshot" align="center">
+  <br>
+  <img src="build/screenshots/screenshot-main.png" alt="screenshot" align="center">
+  <br>
+  <img src="build/screenshots/screenshot-create.png" alt="screenshot" align="center">
+  <br>
+  <img src="build/screenshots/screenshot-clone.png" alt="screenshot" align="center">
+  <br>
+  <img src="build/screenshots/screenshot-delete.png" alt="screenshot" align="center">
+  <br>
+</div>
 
 ## Requirements
 To load or create any new conda environments, you must have anaconda/miniconda installed first. If you do not have anaconda installed, see https://www.continuum.io/downloads#osx to download the GUI installation or run the command below to install miniconda through the command-line.

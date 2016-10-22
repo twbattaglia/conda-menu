@@ -46,6 +46,9 @@ app/cmd/testing.py
 
 dev/
 
-build/Conda-menu*
+build/Conda-menu-*
 
 *.deb
+
+
+.Rhistory
