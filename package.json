@@ -1,8 +1,8 @@
 {
   "name": "Conda-menu",
   "author": "Thomas W. Battaglia <tombattagl@gmail.com>",
-  "version": "0.2.2-dev",
-  "description": "An (unofficial) Electron based menubar app for creating and launching conda virtual environments.",
+  "version": "0.2.2",
+  "description": "An (unofficial) menubar app for creating and launching conda virtual environments.",
   "dependencies": {
     "angular": "^1.5.8",
     "angular-animate": "^1.5.8",
