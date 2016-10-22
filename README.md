@@ -19,17 +19,11 @@ Currently **Conda-menu** only supports macOS and is under very active developmen
 
 ## Screenshots
 <div align="center">
-  <br>
   <img src="build/screenshots/screenshot-main.png" alt="screenshot" align="center">
-  <br>
   <img src="build/screenshots/screenshot-create.png" alt="screenshot" align="center">
-  <br>
   <img src="build/screenshots/screenshot-delete.png" alt="screenshot" align="center">
-  <br>
   <img src="build/screenshots/screenshot-clone.png" alt="screenshot" align="center">
-  <br>
   <img src="build/screenshots/screenshot-drag.gif" alt="screenshot" align="center">
-  <br>
 </div>
 
 ## Requirements
