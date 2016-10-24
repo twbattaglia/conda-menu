@@ -2,6 +2,7 @@
 
 import conda_api as conda
 from os import path
+import platform
 import sys
 import json
 import subprocess
@@ -16,28 +17,33 @@ class SetEncoder(json.JSONEncoder):
 
 def get_version(prefix):
 	'''prefix + "/bin/python", '-V'''
+
+	# Change python location depending upon OS
+	OS = platform.system()
+	if(OS == 'Windows'):
+		loc = "/python"
+	else:
+		loc = "/bin/python"
 	try:
-		proc = subprocess.Popen([prefix + "/bin/python", '-V'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+		proc = subprocess.Popen([prefix + loc, '--version'], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
 		stdout, stderr = proc.communicate()
-		splitted = stderr.split()
-		return ' '.join(splitted[0:2])
+		lines = stderr.decode('utf-8').split()
+		splitted = " ".join(lines[0:2])
+		return(splitted)
 	except:
 		return "error"
 
 def get_packages(prefix):
 	'''get packages with linked function'''
 	linked_packages = conda.linked(prefix)
-	
-	pkgs = [{'name': pkg.rsplit('-', 2)[0],
-			'version': pkg.rsplit('-', 2)[1],
-			'build': pkg.rsplit('-', 2)[2]} for pkg in linked_packages]
-			
-	return(pkgs)
-	
 
+	pkgs = [{'name': pkg.rsplit('-', 2)[0],
+			 'version': pkg.rsplit('-', 2)[1],
+			 'build': pkg.rsplit('-', 2)[2]} for pkg in linked_packages]
+
+	return(pkgs)
 
 def main(prefix):
-
 	# Set root prefix
 	conda.set_root_prefix(prefix = prefix)
 
@@ -48,7 +54,7 @@ def main(prefix):
 			'packages' : get_packages(prefix)} for prefix in conda.get_envs()]
 
 	# Print for nodejs
-	print(json.dumps(env, cls=SetEncoder))
+	print(json.dumps(env, cls = SetEncoder))
 
 if __name__=='__main__':
 	#main(prefix = "/Users/tbattaglia/anaconda2")

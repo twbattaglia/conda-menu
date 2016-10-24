@@ -14,8 +14,18 @@
 
 ## Install
 Download the latest version for your platform from [releases](https://github.com/twbattaglia/conda-menu/releases).
-Currently **Conda-menu** only supports macOS and is under very active development.
+Currently **Conda-menu** only supports macOS and Windows, and is under very active development.
 
+### macOS
+1. Download the latest version in [releases.](https://github.com/twbattaglia/conda-menu/releases)  
+2. Unzip folder
+3. Move .app to the /Applications folder
+4. Run .app
+
+### Windows
+1. Download the latest version in [releases.](https://github.com/twbattaglia/conda-menu/releases)  
+2. Unzip folder
+3. Run .exe
 
 ## Screenshots
 <div align="center">
@@ -27,16 +37,13 @@ Currently **Conda-menu** only supports macOS and is under very active developmen
 </div>
 
 ## Requirements
-To load or create any new conda environments, you must have anaconda/miniconda installed first. If you do not have anaconda installed, see https://www.continuum.io/downloads#osx to download the GUI installation or run the command below to install miniconda.
-```
-# Download Python 3.5
-curl https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
-bash Miniconda3-latest-MacOSX-x86_64.sh
+To launch or create any new conda environments, you must have Anaconda or Miniconda installed and set as the system default Python. If you do not have Anaconda installed, visit https://www.continuum.io/downloads to download the GUI installer for macOS or Windows.
 
-# Download Python 2.7
-curl https://repo.continuum.io/miniconda/Miniconda2-latest-MacOSX-x86_64.sh
-bash Miniconda2-latest-MacOSX-x86_64.sh
-```
+For a slimmed down version of Anaconda, you can install Miniconda which can be installed using the command-line on macOS.
+[Download Python 3.5 for macOS](https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh)
+**Note:** You must run bash Miniconda3-latest-MacOSX-x86_64.sh to install miniconda form the command line.
+[Download Python 3.5 for Windows 64-bit](https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_64.exe)
+[Download Python 3.5 for Windows 32-bit](https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_32.exe)
 
 ## Development
 ```bash
@@ -57,8 +64,10 @@ npm run dev
 ```
 
 ## Powered By
-Electron: http://electron.atom.io/)  
-Node.js : https://nodejs.org)  
+Electron: http://electron.atom.io/  
+Node.js : https://nodejs.org  
+Bootstrap4 : https://v4-alpha.getbootstrap.com/  
+AngularJS : https://angularjs.org/  
 (Continuum Analytics, Inc.) Conda AP: https://github.com/conda/conda-api  
 Electron-Menubar: https://github.com/maxogden/menubar  
 App Icon: Ouroboros by Silas Reeves from the Noun Project  
@@ -69,10 +78,10 @@ App Icon: Ouroboros by Silas Reeves from the Noun Project
 - [x] export env's to YML
 - [x] clone env's
 - [x] option to open app at startup
-- [ ] upload env's to anaconda
-- [ ] change/set default Terminal program
-- [ ] add new anaconda channels
+- [x] add support for windows
 - [ ] github auto-updates
 - [ ] add homebrew installation
+- [ ] change/set default Terminal program
+- [ ] add new anaconda channels
 - [ ] add support for linux
-- [ ] add support for windows
+- [ ] upload env's to anaconda

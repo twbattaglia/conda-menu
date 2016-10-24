@@ -1,5 +1,15 @@
 // Required modules
 var menubar = require('menubar');
+var os = require('os');
+
+// Set options based on system
+// Get anaconda prefix location
+if(os.platform() == "darwin"){
+  onTop = false;
+}
+if(os.platform() == "win32"){
+  onTop = true;
+}
 
 // Initialize manubar
 var opts = {
@@ -9,7 +19,7 @@ var opts = {
   dir: __dirname,
   resizable: false,
   movable: false,
-  alwaysOnTop: false,
+  alwaysOnTop: onTop,
   title: "Conda-menu",
   width: 300,
   height: 350,

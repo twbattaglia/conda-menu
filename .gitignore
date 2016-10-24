@@ -36,19 +36,12 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
-*.pyc
+build/Conda-menu-*
 
-build/Conda-menu-darwin-x64/
-
-dist/conda-menu-mac.zip
+dist/*
 
 app/cmd/testing.py
 
-dev/
-
 build/Conda-menu-*
-
-*.deb
-
 
 .Rhistory

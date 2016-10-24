@@ -1,4 +1,7 @@
-@import url('app/fonts/Lato-Regular.ttf');
+@font-face {
+    font-family: Lato;
+    src: url("../fonts/Lato-Regular.ttf");
+}
 
 html {
   font-size: 12px;

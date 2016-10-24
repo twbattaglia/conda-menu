@@ -1,12 +1,33 @@
 {
   "name": "Conda-menu",
   "author": "Thomas W. Battaglia <tombattagl@gmail.com>",
-  "version": "0.2.2",
+  "version": "0.2.3-dev",
   "description": "An (unofficial) menubar app for creating and launching conda virtual environments.",
+  "homepage": "https://github.com/twbattaglia/conda-menu",
+  "bugs": {
+    "url": "https://github.com/twbattaglia/conda-menu/issues"
+  },
+  "keywords": [
+    "conda",
+    "electron",
+    "menubar",
+    "anaconda",
+    "virtualenv",
+    "miniconda",
+    "terminal",
+    "virtual",
+    "environment",
+    "virtual environments",
+    "packages",
+    "manager",
+    "create",
+    "python"
+  ],
   "dependencies": {
     "angular": "^1.5.8",
     "angular-animate": "^1.5.8",
     "auto-launch": "^5.0.1",
+    "cross-spawn": "^4.0.2",
     "electron-json-config": "^1.4.0",
     "fix-path": "^2.0.0",
     "jquery": "^3.1.0",
@@ -21,6 +42,7 @@
     "electron-packager": "latest",
     "electron-prebuilt": "latest",
     "electron-rebuild": "latest",
+    "electron-winstaller": "^2.3.4",
     "jshint": "latest"
   },
   "repository": {
@@ -34,8 +56,9 @@
     "start": "electron . --enable-logging",
     "dev": "NODE_ENV='development' npm run start",
     "clean": "rm -rf build/Conda-menu-* | rm -rf dist/*",
-    "osx": "electron-packager . Conda-menu --platform darwin --out build --version=1.4.3 --icon=build/Icon.icns --overwrite",
-    "zip64": "bash build/compress.sh",
-    "build": "npm run clean && npm run osx && npm run zip64"
+    "build:macos": "electron-packager . Conda-menu --platform darwin --out build --version=1.4.3 --icon=build/Icon.icns --overwrite --app-bundle-id=com.twbattaglia.conda-menu",
+    "build:windows": "electron-packager . Conda-menu --platform win32 --arch=ia32 --out build --version=1.4.3 --icon=build/Icon.ico --overwrite --app-bundle-id=com.twbattaglia.conda-menu",
+    "compress": "bash build/compress.sh",
+    "build": "npm run clean && npm run build:macos && npm run build:windows && npm run compress"
   }
 }

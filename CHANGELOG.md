@@ -1,3 +1,8 @@
+### 0.2.3 (TBD)
+- added Windows support
+- changed app icon
+- fixed python 3.5 error when fetching environments
+
 ### 0.2.2 (2016-10-22)
 - added dropdown option to clone environment
 - changed fonts

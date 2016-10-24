@@ -1,5 +1,6 @@
 var pythonShell = require('python-shell');
 var childprocess = require('child_process');
+var cspawn = require('cross-spawn');
 var path = require("path");
 var _ = require('underscore');
 var fixPath = require('fix-path');
@@ -9,6 +10,7 @@ var Dialog = require('electron').remote.dialog;
 var Shell = require('electron').remote.shell;
 var AutoLaunch = require('auto-launch');
 var config = require('electron-json-config');
+var os = require('os');
 
 // fix path for macOS
 fixPath();
@@ -26,8 +28,16 @@ if (!shelljs.which('conda')) {
 }
 
 // Get anaconda prefix location
-var aPrefix = shelljs.which('conda').stdout.replace("/bin/conda", "");
-console.log("Anaconda root prefix:", aPrefix);
+if(os.platform() == "darwin"){
+  console.log("Using macOS");
+  var aPrefix = shelljs.which('conda').stdout.replace("/bin/conda", "");
+  console.log("Anaconda root prefix:", aPrefix);
+}
+if(os.platform() == "win32"){
+  console.log("Using Windows");
+  var aPrefix = shelljs.which('conda').stdout.replace("CONDA.EXE", "").replace("SCRIPTS", "");
+  console.log(aPrefix);
+}
 
 // Set root
 var appRoot = path.join(__dirname, 'app/cmd/');
@@ -100,13 +110,16 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
         });
       });
     };
-
+    
     // Launch conda environment function
     $scope.launch_env = function (envName){
-      childprocess.spawn('bash', [ path.join(__dirname, 'app/cmd/launch_env.sh'), envName.prefix], {
-        env:_.extend(process.env.PATH, { PATH: process.env.PATH + ':/usr/local/bin' })
-      });
       console.log("Launching Env: ", envName.prefix);
+      if(os.platform() == "darwin"){
+        var resMac = cspawn.sync('bash', [ __dirname + '/app/cmd/launch_env.sh', envName.prefix], { stdio: 'inherit' });
+      }
+      if(os.platform() == "win32"){
+        shelljs.exec('start cmd /k activate ' + envName.prefix, function(code, stdout, stderr) {});
+      }
     };
 
     // Get installed python packages function
