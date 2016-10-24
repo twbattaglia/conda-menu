@@ -1,7 +1,7 @@
 {
   "name": "Conda-menu",
   "author": "Thomas W. Battaglia <tombattagl@gmail.com>",
-  "version": "0.2.3-dev",
+  "version": "0.2.3",
   "description": "An (unofficial) menubar app for creating and launching conda virtual environments.",
   "homepage": "https://github.com/twbattaglia/conda-menu",
   "bugs": {
