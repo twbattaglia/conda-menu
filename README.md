@@ -13,8 +13,7 @@
 </p>
 
 ## Install
-Download the latest version for your platform from [releases](https://github.com/twbattaglia/conda-menu/releases).
-Currently **Conda-menu** only supports macOS and Windows, and is under very active development.
+Download the latest version for your platform from [releases](https://github.com/twbattaglia/conda-menu/releases). Currently **Conda-menu** only supports macOS and Windows, and is under very active development.
 
 ### macOS
 1. Download the latest version in [releases.](https://github.com/twbattaglia/conda-menu/releases)  
@@ -37,13 +36,13 @@ Currently **Conda-menu** only supports macOS and Windows, and is under very acti
 </div>
 
 ## Requirements
-To launch or create any new conda environments, you must have Anaconda or Miniconda installed and set as the system default Python. If you do not have Anaconda installed, visit https://www.continuum.io/downloads to download the GUI installer for macOS or Windows.
+To launch or create any new conda environments, you must have Anaconda or Miniconda installed and set as the system default Python. If you do not have Anaconda installed, visit https://www.continuum.io/downloads to download the GUI installer for macOS or Windows.  
 
 For a slimmed down version of Anaconda, you can install Miniconda which can be installed using the command-line on macOS.
-[Download Python 3.5 for macOS](https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh)
-**Note:** You must run bash Miniconda3-latest-MacOSX-x86_64.sh to install miniconda form the command line.
-[Download Python 3.5 for Windows 64-bit](https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_64.exe)
-[Download Python 3.5 for Windows 32-bit](https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_32.exe)
+[Download Python 3.5 for macOS](https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh)  
+**Note:** You must run bash Miniconda3-latest-MacOSX-x86_64.sh to install miniconda form the command line.  
+[Download Python 3.5 for Windows 64-bit](https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_64.exe)  
+[Download Python 3.5 for Windows 32-bit](https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_32.exe)  
 
 ## Development
 ```bash
