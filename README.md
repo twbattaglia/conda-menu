@@ -36,13 +36,10 @@ Download the latest version for your platform from [releases](https://github.com
 </div>
 
 ## Requirements
-To launch or create any new conda environments, you must have Anaconda or Miniconda installed and set as the system default Python. If you do not have Anaconda installed, visit https://www.continuum.io/downloads to download the GUI installer for macOS or Windows.  
+To launch or create any new conda environments, you must have **Anaconda** or **Miniconda** installed and set as the system default Python. If you do not have **Anaconda** installed, visit https://www.continuum.io/downloads to download the GUI installer for macOS or Windows. Or for a slimmed down version, you can install Miniconda (http://conda.pydata.org/miniconda.html).  
 
-For a slimmed down version of Anaconda, you can install Miniconda which can be installed using the command-line on macOS.  
-<br>
 [Download Python 3.5 for macOS](https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh)  
-**Note:** You must run bash Miniconda3-latest-MacOSX-x86_64.sh to install miniconda form the command line.  
-<br>
+**Note:** You must run `bash Miniconda3-latest-MacOSX-x86_64.sh` to install miniconda from the command line.  
 [Download Python 3.5 for Windows 64-bit](https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_64.exe)  
 [Download Python 3.5 for Windows 32-bit](https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_32.exe)  
 
