@@ -1,4 +1,4 @@
-### 0.2.3 (TBD)
+### 0.2.3 (2016-10-23)
 - added Windows support
 - changed app icon
 - fixed python 3.5 error when fetching environments
