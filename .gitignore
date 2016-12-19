@@ -45,3 +45,5 @@ app/cmd/testing.py
 build/Conda-menu-*
 
 .Rhistory
+
+*.pyc
