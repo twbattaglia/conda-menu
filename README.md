@@ -38,8 +38,11 @@ Download the latest version for your platform from [releases](https://github.com
 ## Requirements
 To launch or create any new conda environments, you must have **Anaconda** or **Miniconda** installed and set as the system default Python. If you do not have **Anaconda** installed, visit https://www.continuum.io/downloads to download the GUI installer for macOS or Windows. Or for a slimmed down version, you can install Miniconda (http://conda.pydata.org/miniconda.html).  
 
+#### macOS
 [Download Python 3.5 for macOS](https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh)  
 **Note:** You must run `bash Miniconda3-latest-MacOSX-x86_64.sh` to install miniconda from the command line.  
+
+#### Windows
 [Download Python 3.5 for Windows 64-bit](https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_64.exe)  
 [Download Python 3.5 for Windows 32-bit](https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_32.exe)  
 
@@ -66,7 +69,7 @@ Electron: http://electron.atom.io/
 Node.js : https://nodejs.org  
 Bootstrap4 : https://v4-alpha.getbootstrap.com/  
 AngularJS : https://angularjs.org/  
-(Continuum Analytics, Inc.) Conda AP: https://github.com/conda/conda-api  
+(Continuum Analytics, Inc.) Conda API: https://github.com/conda/conda-api  
 Electron-Menubar: https://github.com/maxogden/menubar  
 App Icon: Ouroboros by Silas Reeves from the Noun Project  
 

@@ -30,26 +30,25 @@ if (!shelljs.which('conda')) {
 // Get anaconda prefix location
 if(os.platform() == "darwin"){
   console.log("Using macOS");
-  var aPrefix = shelljs.which('conda').stdout.replace("/bin/conda", "");
-  console.log("Anaconda root prefix:", aPrefix);
+  var prefix = shelljs.which('conda').stdout.replace("/bin/conda", "");
+  console.log("Anaconda root prefix:", prefix);
 }
 if(os.platform() == "win32"){
   console.log("Using Windows");
-  var aPrefix = shelljs.which('conda').stdout.replace("CONDA.EXE", "").replace("SCRIPTS", "");
-  console.log(aPrefix);
+  var prefix = shelljs.which('conda').stdout.replace("CONDA.EXE", "").replace("SCRIPTS", "");
+  console.log(prefix);
 }
 
-// Set root
-var appRoot = path.join(__dirname, 'app/cmd/');
-
-// Set default python-shell script location
-pythonShell.defaultOptions = { scriptPath: appRoot };
+// Set anaconda root prefix
+pythonShell.defaultOptions = {
+  scriptPath: path.join(__dirname, 'app/cmd/')
+};
 
 // Initialize angular apply
-var ngApp = angular.module('ngApp', ['selectize', "angular-ladda", 'ngAnimate']);
+var ngApp = angular.module('ngApp', ['selectize', 'angular-ladda', 'ngAnimate']);
 
 // Global settings for ladda spinner
-ngApp.config(function (laddaProvider) {
+ngApp.config( function(laddaProvider) {
     laddaProvider.setOption({
       style: 'expand-left',
       spinnerSize: 14,
@@ -61,11 +60,11 @@ ngApp.config(function (laddaProvider) {
 ngApp.controller('mainCtrl', ['$scope', '$location',
   function ($scope, $location, $element) {
 
-    // Quality testing
+    // production level testing
     $scope.testing = "hello!";
 
     // Set root prefix
-    $scope.anacondaRoot = aPrefix;
+    $scope.anacondaRoot = prefix;
 
     // Set app version
     $scope.appVersion = app.getVersion();
@@ -76,14 +75,14 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
     };
 
     // Function to refresh envs
-    $scope.refresh = function(){
-      $scope.get_envs();
-    };
+    //$scope.refresh = function(){
+    //  $scope.getCondaEnvs();
+    //};
 
     // Get conda environments function
-    $scope.get_envs = function (){
+    $scope.getCondaEnvs = function (){
       pythonShell.run('get_envs.py',
-      { args: [aPrefix], mode: 'json'},
+      { args: [prefix], mode: 'json'},
       function (err, results) {
         if (err){
           console.log(err);
@@ -97,9 +96,9 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
     };
 
     // Get general conda information for settings
-    $scope.get_conda_info = function (){
+    $scope.getCondaInfo = function (){
       pythonShell.run('get_conda_info.py',
-      {args: [aPrefix], mode: 'json'},
+      {args: [prefix], mode: 'json'},
       function (err, results) {
         if (err){
           console.log(err);
@@ -110,9 +109,9 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
         });
       });
     };
-    
+
     // Launch conda environment function
-    $scope.launch_env = function (envName){
+    $scope.launchEnv = function (envName){
       console.log("Launching Env: ", envName.prefix);
       if(os.platform() == "darwin"){
         var resMac = cspawn.sync('bash', [ __dirname + '/app/cmd/launch_env.sh', envName.prefix], { stdio: 'inherit' });
@@ -122,8 +121,19 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
       }
     };
 
+    // Launch conda environment in ipython notebook function
+    $scope.launchJupyter = function (envName){
+      console.log("Launching Jupyter: ", envName.prefix);
+      if(os.platform() == "darwin"){
+        var resMac = cspawn.sync('bash', [ __dirname + '/app/cmd/launch_jupyter.sh', envName.prefix], { stdio: 'inherit' });
+      }
+      if(os.platform() == "win32"){
+        shelljs.exec('start cmd /k activate ' + envName.prefix + '; jupyter notebook', function(code, stdout, stderr) {});
+      }
+    };
+
     // Get installed python packages function
-    $scope.get_installed = function (){
+    $scope.getPipPackages = function (){
       pythonShell.run('get_installed.py',
       {mode: 'json'},
       function (err, results) {
@@ -134,7 +144,6 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
         console.log("Getting installed packages", results[0]);
         $scope.$apply(function(){
             $scope.installed = results[0];
-            $scope.pypiInstallLoading = false;
         });
       });
     };
@@ -152,7 +161,7 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
     };
 
     // Create new environment function
-    $scope.create_env = function(name, version, packages){
+    $scope.createNewEnv = function(name, version, packages){
       $scope.createLoading = true;
       $scope.newEnvName = name;
       if(version === null){
@@ -160,24 +169,30 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
       }
       console.log("Creating environment", name);
       pythonShell.run('create_env.py',
-      {mode: 'json', args: [aPrefix, name, version, packages]},
+      {mode: 'json', args: [prefix, name, version, packages]},
       function (err, results) {
         if (err) {
           console.log("Create error:", err);
-          alert(err);
+          alert(err.traceback);
           $('#createEnvModal').on('hidden.bs.modal', function () {
               $(this).find('form').trigger('reset');
           });
           console.log("Create results:", results);
         }
         console.log("Creating environment", name, "completed.");
-        $scope.get_envs();
+        $scope.getCondaEnvs();
         $('#createEnvModal').modal('hide');
         $('#createEnvModal').on('hidden.bs.modal', function () {
             $(this).find('form').trigger('reset');
         });
         $scope.newEnvPackages = [name = "pip"]; // reset packages
       });
+    };
+
+    // Create modal for exorting conda-env
+    $scope.exportEnvModal = function(envName){
+      $('#exportEnvModal').modal('show');
+      $scope.exportEnvName = envName.prefix;
     };
 
     // Functions to create YML when file is dragged into app
@@ -190,9 +205,9 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
     document.body.ondrop = function(ev) {
       document.getElementById('dropoverlay').className = "hidden";
       var file_path = ev.dataTransfer.files[0].path;
-      console.log(file_path);
+      console.log("File imported from", file_path);
       $('#createEnvYamlModal').modal('show');
-      $scope.create_env_yml(file_path);
+      $scope.createEnvYml(file_path);
       ev.preventDefault();
     };
     document.body.ondragleave = function () {
@@ -200,11 +215,11 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
       return false;
     };
 
-    // Function to create YML generated env
-    $scope.create_env_yml = function(yml){
+    // Function to create env by imported YAML file
+    $scope.createEnvYml = function(yml){
       console.log("Creating YML environment", name);
       pythonShell.run('create_env_yml.py',
-      {mode: 'json', args: [aPrefix, yml]},
+      {mode: 'json', args: [prefix, yml]},
       function (err, results) {
         if (err) {
           console.log("Create error:", err);
@@ -212,36 +227,35 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
           console.log("Create results:", results);
         }
         console.log("Creating YAML environment, completed.");
-        $scope.get_envs();
-        $('#createEnvModal').modal('hide');
+        $scope.$apply(function(){
+            $scope.getCondaEnvs();
+        });
         $('#createEnvYamlModal').modal('hide');
-        $scope.clearForm();
-        $scope.createLoadingYml = false;
       });
     };
 
     // Dialog for creating new YAML env
-    $scope.openDialog = function() {
-        $scope.createLoadingYml = true;
-        Dialog.showOpenDialog({
-            title: 'open YAML',
-            properties: ['openFile'],
-            buttonLabel: "Import",
-            filters: [
-              {name: 'YAML', extensions: ['yml', 'yaml', 'txt']},
-              {name: 'All Files', extensions: ['*']}
-          ]
-        }, function(file) {
-          if(file === undefined){
-              $('#createEnvModal').modal('hide');
-              $scope.createLoadingYml = false;
-              console.log("No file selected");
-          } else{
-              console.log("file selected");
-              $scope.create_env_yml(file);
-          }
-        });
-    };
+    //$scope.openDialog = function() {
+    //    $scope.createLoadingYml = true;
+    //    Dialog.showOpenDialog({
+    //        title: 'open YAML',
+    //        properties: ['openFile'],
+    //        buttonLabel: "Import",
+    //        filters: [
+    //          {name: 'YAML', extensions: ['yml', 'yaml', 'txt']},
+    //          {name: 'All Files', extensions: ['*']}
+    //      ]
+    //    }, function(file) {
+    //      if(file === undefined){
+    //          $('#createEnvModal').modal('hide');
+    //          $scope.createLoadingYml = false;
+    //          console.log("No file selected");
+    //      } else{
+    //          console.log("file selected");
+    //          $scope.createEnvYml(file);
+    //      }
+    //    });
+    //};
 
     // Create modal for cloning conda-env
     $scope.cloneEnvModal = function(envName){
@@ -250,17 +264,17 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
     };
 
     // Cloned environment function
-    $scope.clone_env = function(name, env){
+    $scope.cloneEnv = function(name, env){
       $scope.cloneLoading = true;
       console.log("Cloning environment", env, "into ", name);
       pythonShell.run('clone_env.py',
-      {mode: 'json', args: [aPrefix, name, env]},
+      {mode: 'json', args: [prefix, name, env]},
       function (err, results) {
         if (err) {
           console.log("Cloned error:", err);
           console.log("Cloned results:", results);
         }
-        $scope.get_envs();
+        $scope.getCondaEnvs();
         console.log("Cloned environment", name, "created..");
         $scope.cloneLoading = false;
         $('#cloneEnvModal').modal('hide');
@@ -272,20 +286,20 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
 
     // Dialog for exporting env to YML
     $scope.saveYAML = function(env) {
-      Dialog.showSaveDialog({defaultPath: env.prefix + '.yaml'}, function(fileName){
+      Dialog.showSaveDialog({defaultPath: env + '.yaml'}, function(fileName){
         if (fileName === undefined){
           console.log("No file save.");
           return;
         }
         console.log("Saved environment to: ", fileName);
-        $scope.exportEnv(fileName, env.prefix);
+        $scope.exportEnv(fileName, env);
       });
     };
 
     // Function to export env
     $scope.exportEnv = function(file, name){
       pythonShell.run('export_env_yml.py',
-      {mode: 'json', args: [aPrefix, file, name]},
+      {mode: 'json', args: [prefix, file, name]},
       function (err, results) {
         if (err) {
           console.log("Export error:", err);
@@ -312,17 +326,17 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
     };
 
     // Remove environment function
-    $scope.remove_env = function(name){
+    $scope.removeEnv = function(name){
       $scope.removeLoading = true;
       console.log("Removing environment", name);
       pythonShell.run('remove_env.py',
-      {mode: 'json', args: [aPrefix, name]},
+      {mode: 'json', args: [prefix, name]},
       function (err, results) {
         if (err) {
           console.log("Remove error:", err);
           console.log("Remove results:", results);
         }
-        $scope.get_envs();
+        $scope.getCondaEnvs();
         console.log("Removing environment", name, "completed.");
         $scope.removeLoading = false;
         $('#envDeleteModal').modal('hide');
@@ -369,8 +383,8 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
     };
 
     // Run at app startup
-    $scope.get_envs();
-    $scope.get_installed();
-    $scope.get_conda_info();
+    $scope.getCondaEnvs();
+    $scope.getPipPackages();
+    $scope.getCondaInfo();
 
 }]); // End of main controller

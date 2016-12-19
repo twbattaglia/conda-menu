@@ -43,6 +43,12 @@ def get_packages(prefix):
 
 	return(pkgs)
 
+def sanitize(prefix):
+	'''remove . from prefix or collapse will break'''
+	sanitized = prefix.replace(".", "_")
+	return(sanitized)
+
+
 def main(prefix):
 	# Set root prefix
 	conda.set_root_prefix(prefix = prefix)
@@ -51,11 +57,11 @@ def main(prefix):
 	env = [{'location': prefix,
 			'version' : get_version(prefix),
 			'prefix': path.basename(prefix),
+			'prefix_sanitized': sanitize(path.basename(prefix)),
 			'packages' : get_packages(prefix)} for prefix in conda.get_envs()]
 
 	# Print for nodejs
 	print(json.dumps(env, cls = SetEncoder))
 
 if __name__=='__main__':
-	#main(prefix = "/Users/tbattaglia/anaconda2")
 	main(prefix = sys.argv[1])

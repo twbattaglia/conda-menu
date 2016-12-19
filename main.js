@@ -2,6 +2,9 @@
 var menubar = require('menubar');
 var os = require('os');
 
+// Livereload (turn off for production)
+//require('electron-reload')(__dirname);
+
 // Set options based on system
 // Get anaconda prefix location
 if(os.platform() == "darwin"){
@@ -21,7 +24,7 @@ var opts = {
   movable: false,
   alwaysOnTop: onTop,
   title: "Conda-menu",
-  width: 300,
+  width: 350,
   height: 350,
   transparent: true
 };

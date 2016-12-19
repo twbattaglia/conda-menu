@@ -4,7 +4,31 @@
 }
 
 html {
-  font-size: 12px;
+  font-size: 14px;
+}
+
+.navbar-fixed-bottom {
+  background-color: #bdc3c7;
+  z-index: 9;
+}
+
+.navbar-fixed-top{
+  background-color: #2980B9;
+  z-index: 9;
+  color: #F5F5F5
+}
+
+.gray-text {
+  color: #808080
+}
+
+.close {
+  color:#F5F5F5;
+  opacity:1;
+}
+
+.btn:focus, .btn:active {
+   outline: none !important;
 }
 
 body {
@@ -12,41 +36,24 @@ body {
   background-color: #EEEEEE;
 }
 
-.btn {
-    letter-spacing: 1px;
-}
-.btn:focus,.btn:active {
-   outline: none !important;
-}
-
-.cm-blue1 {
-  background-color: ##73B1D6;
-}
-.cm-blue2 {
-  background-color: #4589B0;
-}
-.cm-blue3 {
-  background-color: #1D628B;
-}
-.cm-white1 {
-  background-color: #FFFFF7;
-}
-.cm-dark {
-  background-color: #444444;
-}
-.cm-red {
-  color: #B23641;
-}
-
-.hidden {
-  opacity: 0;
-  z-index: -1 !important;
+.list-group {
+  margin-top: 46px;
+  margin-bottom: 20px;
+  z-index: 10;
 }
 
 .modal .modal-header {
   background-color: #4589B0;
   color: #ffffff;
-  padding-bottom: 0em;
+  padding-top: 5px;
+  border-radius: 0;
+  padding-bottom: 5px;
+  height: 40px;
+}
+
+.hidden {
+  opacity: 0;
+  z-index: -1 !important;
 }
 
 #dropoverlay {
@@ -64,57 +71,4 @@ body {
   color: white;
   background-color: #444444;
   transition: all 250ms;
-}
-
-.list-group{
-  margin-top: 40px;
-  margin-bottom: 42px;
-  z-index: 10
-}
-
-.dropdown-menu {
-  min-width: 106px;
-}
-
-.navbar-fixed-bottom {
-  background-color: #1D628B;
-  z-index: 9;
-}
-
-.navbar-fixed-top{
-  background-color: #1D628B;
-  z-index: 9;
-}
-
-.list-group-item{
-  padding-bottom: 0px;
-}
-
-.item { }
-
-.item.ng-move,
-.item.ng-enter,
-.item.ng-leave {
-  -webkit-transition: 300ms cubic-bezier(0.250, 0.100, 0.250, 1.000) all;
-  -moz-transition: 300ms cubic-bezier(0.250, 0.100, 0.250, 1.000) all;
-  -ms-transition: 300ms cubic-bezier(0.250, 0.100, 0.250, 1.000) all;
-  -o-transition: 300ms cubic-bezier(0.250, 0.100, 0.250, 1.000) all;
-  transition: 300ms cubic-bezier(0.250, 0.100, 0.250, 1.000) all;
-  position: relative;
-  display: block;
-  overflow: hidden;
-  text-overflow: clip;
-  white-space:nowrap;
-}
-
-.item.ng-leave.ng-leave-active,
-.item.ng-move,
-.item.ng-enter {
-  opacity: 0;
-}
-
-.item.ng-leave,
-.item.ng-move.ng-move-active,
-.item.ng-enter.ng-enter-active {
-  opacity: 1;
 }

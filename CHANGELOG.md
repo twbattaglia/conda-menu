@@ -1,4 +1,10 @@
-### 0.2.3 (2016-10-23)
+### 0.2.4 (TBD)
+- Slight redesign of the UI to handle more functions
+- Upgrade to bootstrap4-alpha5
+- Added option to launch jupyter notebook with selected conda environment
+- Added option to export env to YAML or Anaconda account
+
+### 0.2.3 (2016-10-24)
 - added Windows support
 - changed app icon
 - fixed python 3.5 error when fetching environments
