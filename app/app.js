@@ -74,11 +74,6 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
       app.quit();
     };
 
-    // Function to refresh envs
-    //$scope.refresh = function(){
-    //  $scope.getCondaEnvs();
-    //};
-
     // Get conda environments function
     $scope.getCondaEnvs = function (){
       pythonShell.run('get_envs.py',
@@ -384,6 +379,7 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
 
     // Run at app startup
     $scope.getCondaEnvs();
+    setInterval(function(){ $scope.getCondaEnvs(); }, 80000);
     $scope.getPipPackages();
     $scope.getCondaInfo();
 
