@@ -164,7 +164,7 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
       }
       console.log("Creating environment", name);
       pythonShell.run('create_env.py',
-      {mode: 'json', args: [prefix, name, version, packages]},
+      {args: [prefix, name, version, packages]},
       function (err, results) {
         if (err) {
           console.log("Create error:", err);
