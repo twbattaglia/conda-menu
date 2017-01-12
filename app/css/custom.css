@@ -13,7 +13,7 @@ html {
 }
 
 .navbar-fixed-top{
-  background-color: #2980B9;
+  background-color: #1F4788;
   z-index: 9;
   color: #F5F5F5
 }
@@ -43,7 +43,7 @@ body {
 }
 
 .modal .modal-header {
-  background-color: #4589B0;
+  background-color: #6C7A89;
   color: #ffffff;
   padding-top: 5px;
   border-radius: 0;
