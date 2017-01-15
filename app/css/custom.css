@@ -4,18 +4,38 @@
 }
 
 html {
+  box-sizing: border-box;
   font-size: 14px;
 }
 
-.navbar-fixed-bottom {
-  background-color: #bdc3c7;
-  z-index: 9;
+
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: #FCF7F8;
+  color: #000;
 }
 
-.navbar-fixed-top{
-  background-color: #1F4788;
+.modal-open{
+  padding-right: 0px !important;
+}
+
+.h6, h6{
+  font-size: 1.3rem;
+}
+
+i{
+  font-size: 21px;
+}
+
+#navbar{
+  background-color: #0267C1;
   z-index: 9;
-  color: #F5F5F5
+  color:#F5F5F5;
+}
+
+.btn-primary{
+  background-color: #0075C4;
+  outline-color: #0075C4;
 }
 
 .gray-text {
@@ -31,24 +51,28 @@ html {
    outline: none !important;
 }
 
-body {
-  font-family: 'Lato', sans-serif;
-  background-color: #EEEEEE;
-}
-
 .list-group {
-  margin-top: 46px;
-  margin-bottom: 20px;
+  margin-top: 48px;
+  margin-bottom: 0px;
   z-index: 10;
 }
 
+.modal-body{
+  padding-bottom: 5px;
+}
+
+.modal-footer{
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
 .modal .modal-header {
-  background-color: #6C7A89;
+  background-color: #5B616A;
   color: #ffffff;
   padding-top: 5px;
   border-radius: 0;
   padding-bottom: 5px;
-  height: 40px;
+  height: 45px;
 }
 
 .hidden {
@@ -57,6 +81,7 @@ body {
 }
 
 #dropoverlay {
+  top: 0px;
   display: -ms-flexbox;
   -ms-flex-pack: center;
       justify-content: center;

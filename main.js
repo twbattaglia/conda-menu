@@ -25,8 +25,9 @@ var opts = {
   alwaysOnTop: onTop,
   title: "Conda-menu",
   width: 350,
-  height: 350,
-  transparent: true
+  height: 375,
+  transparent: true,
+  frame: false
 };
 
 // set menubar

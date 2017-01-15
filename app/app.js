@@ -22,7 +22,7 @@ var condaMenuAutoLauncher = new AutoLaunch({
 
 // Verify anaconda installation
 if (!shelljs.which('conda')) {
-  confirm("Conda installation could not be found! Please install anaconda or miniconda before running again!");
+  confirm("Conda installation could not be found! Please install Anaconda or Miniconda before running again!");
   Shell.openExternal('https://www.continuum.io/downloads');
   app.quit();
 }
@@ -36,7 +36,7 @@ if(os.platform() == "darwin"){
 if(os.platform() == "win32"){
   console.log("Using Windows");
   var prefix = shelljs.which('conda').stdout.replace("CONDA.EXE", "").replace("SCRIPTS", "");
-  console.log(prefix);
+  console.log("Anaconda root prefix:", prefix);
 }
 
 // Set anaconda root prefix
@@ -380,7 +380,7 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
     // Run at app startup
     $scope.getCondaEnvs();
     setInterval(function(){ $scope.getCondaEnvs(); }, 80000);
-    $scope.getPipPackages();
+    //$scope.getPipPackages();
     $scope.getCondaInfo();
 
 }]); // End of main controller
