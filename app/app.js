@@ -45,7 +45,7 @@ pythonShell.defaultOptions = {
 };
 
 // Initialize angular apply
-var ngApp = angular.module('ngApp', ['selectize', 'angular-ladda', 'ngAnimate']);
+var ngApp = angular.module('ngApp', ['selectize', 'angular-ladda']);
 
 // Global settings for ladda spinner
 ngApp.config( function(laddaProvider) {
