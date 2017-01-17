@@ -56,6 +56,7 @@ ngApp.config( function(laddaProvider) {
     });
 });
 
+
 // Main Controller
 ngApp.controller('mainCtrl', ['$scope', '$location',
   function ($scope, $location, $element) {
@@ -72,6 +73,25 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
     // Function to quit the app
     $scope.quit = function(){
       app.quit();
+    };
+
+    // Function to quit the app
+    var degrees = 360;
+    $scope.refresh = function(){
+      var csstransition = '1000ms ease';
+      var cssrotate = 'rotate(' + degrees + 'deg)';
+      angular.element('#refresh').css({
+        '-webkit-transition': csstransition,
+        '-moz-transition': csstransition,
+        '-o-transition': csstransition,
+        'transition': csstransition,
+        '-moz-transform': cssrotate,
+        '-webkit-transform': cssrotate,
+        '-o-transform': cssrotate,
+        '-ms-transform': cssrotate
+      });
+      degrees += 360;
+      $scope.getCondaEnvs();
     };
 
     // Get conda environments function
@@ -128,20 +148,20 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
     };
 
     // Get installed python packages function
-    $scope.getPipPackages = function (){
-      pythonShell.run('get_installed.py',
-      {mode: 'json'},
-      function (err, results) {
-        if (err) {
-          console.log("Installed error:", err);
-          console.log("Installed results:", results);
-        }
-        console.log("Getting installed packages", results[0]);
-        $scope.$apply(function(){
-            $scope.installed = results[0];
-        });
-      });
-    };
+    //$scope.getPipPackages = function (){
+    //  pythonShell.run('get_installed.py',
+    //  {mode: 'json'},
+    //  function (err, results) {
+    //    if (err) {
+    //      console.log("Installed error:", err);
+    //      console.log("Installed results:", results);
+    //    }
+    //    console.log("Getting installed packages", results[0]);
+    //    $scope.$apply(function(){
+    //        $scope.installed = results[0];
+    //    });
+    //  });
+    //};
 
     // Settings for selectize
     $scope.newEnvVersion = "3.5";

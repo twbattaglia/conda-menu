@@ -17,73 +17,82 @@
 
     <!-- Overlay UI -->
     <div id="dropoverlay" class="hidden">
-      Create new environment from YAML
+      Drop file to create a new conda environment
     </div>
 
+
     <!-- Top Navbar -->
-    <nav class="navbar fixed-top navbar-light bg-faded" id="navbar">
-      <div class="d-flex justify-content-between align-items-baseline">
-        <div> <i data-toggle="modal" data-target="#settingsModal" class="icon ion-gear-a"></i> </div>
-        <h6> Conda-menu </h6>
-        <div>
-          <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#createEnvModal">
-            Create
-          </button>
+    <div id="header">
+      <nav class="navbar navbar-light bg-faded" id="navbar">
+        <div class="d-flex justify-content-between align-items-baseline">
+          <div>
+            <span>
+              <i data-toggle="modal" data-target="#settingsModal" class="icon ion-gear-a divider-right"></i>
+              <i id="refresh" ng-click="refresh()" class="icon ion-refresh divider-left"></i>
+            </span>
+          </div>
+          <h6>Conda-menu</h6>
+          <div>
+            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#createEnvModal">
+              Create
+            </button>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
 
 
     <!-- List of Envs -->
-    <div id="accordion" role="tablist" aria-multiselectable="true">
-      <ul class="list-group">
-          <li ng-cloak role="tab"
-                       class="list-group-item list-group-item-action flex-column align-items-start"
-                       ng-repeat="item in environments | orderBy: 'prefix'">
+    <div id="container">
+      <div id="accordion" role="tablist" aria-multiselectable="true">
+        <ul class="list-group">
+            <li ng-cloak role="tab"
+                         class="list-group-item list-group-item-action flex-column align-items-start"
+                         ng-repeat="item in environments | orderBy: 'prefix'">
 
-            <div class="d-flex w-100 justify-content-between align-items-center">
+              <div class="d-flex w-100 justify-content-between align-items-center">
 
-              <!-- Prefix items -->
-              <h5 class="mb-1">{{item.prefix}}</h5>
+                <!-- Prefix items -->
+                <h5 class="mb-1">{{item.prefix}}</h5>
 
-              <!-- Right items -->
-              <div class="btn-group">
-                <button type="button" class="btn btn-secondary" ng-click="launchEnv(item)">Launch</button>
-                <button type="button"
-                        class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
-                        id="headingOne"
-                        data-toggle="collapse"
-                        href="#{{item.prefix_sanitized}}">
-                </button>
+                <!-- Right items -->
+                <div class="btn-group">
+                  <button type="button" class="btn btn-secondary" ng-click="launchEnv(item)">Launch</button>
+                  <button type="button"
+                          class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
+                          id="headingOne"
+                          data-toggle="collapse"
+                          href="#{{item.prefix_sanitized}}">
+                  </button>
+                </div>
               </div>
-            </div>
 
-            <!-- Python version items -->
-            <small>{{item.version}}</small>
+              <!-- Python version items -->
+              <p class="gray-text">{{item.version}}</p>
 
-            <!-- More items -->
-            <div id="{{item.prefix_sanitized}}" class="collapse"
-                                                role="tabpanel"
-                                                aria-labelledby="headingOne"
-                                                style="padding-top: 10px;">
-                    <button type="button" class="btn btn-secondary btn-sm" ng-click="launchJupyter(item)">
-                      Notebook
-                    </button>
-                    <button type="button" class="btn btn-secondary btn-sm" ng-click="getInfoModal(item)">
-                      Info
-                    </button>
-                    <button type="button" class="btn btn-secondary btn-sm" ng-click="exportEnvModal(item)">
-                      Export
-                    </button>
-                    <button type="button" class="btn btn-secondary btn-sm" ng-click="cloneEnvModal(item)">
-                      Clone
-                    </button>
-                    <button type="button" class="btn btn-danger btn-sm" ng-click="removeEnvModal(item)">
-                      <span class="icon ion-trash-b"> Remove
-                    </button>
-            </div>
-          </li>
-        <ul>
+              <!-- More items -->
+              <div id="{{item.prefix_sanitized}}" class="collapse"
+                                                  role="tabpanel"
+                                                  aria-labelledby="headingOne">
+                      <button style="font-size:13px;" type="button" class="btn btn-secondary btn-sm" ng-click="launchJupyter(item)">
+                        Notebook
+                      </button>
+                      <button style="font-size:13px;" type="button" class="btn btn-secondary btn-sm" ng-click="getInfoModal(item)">
+                        Info
+                      </button>
+                      <button style="font-size:13px;" type="button" class="btn btn-secondary btn-sm" ng-click="exportEnvModal(item)">
+                        Export
+                      </button>
+                      <button style="font-size:13px;" type="button" class="btn btn-secondary btn-sm" ng-click="cloneEnvModal(item)">
+                        Clone
+                      </button>
+                      <button style="font-size:13px;" type="button" class="btn btn-danger btn-sm" ng-click="removeEnvModal(item)">
+                        <span class="icon ion-trash-b"> Remove
+                      </button>
+              </div>
+            </li>
+          <ul>
+      </div>
     </div>
 
 
@@ -239,15 +248,8 @@
             </div>
           </div>
           <div class="modal-footer">
-            <div class="d-flex justify-content-end">
-              <div class="mr-auto p-2">
-                <button type="button" class="btn btn-danger" ng-click="quit()">Quit App</button>
-              </div>
-              <div class="p-2">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
+            <button type="button" class="btn btn-danger" ng-click="quit()">Quit App</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
@@ -325,7 +327,6 @@
           </div>
           <div class="modal-body">
             <span class="align-middle"><h5> Please wait...</h5></span>
-
           </div>
         </div>
       </div>
