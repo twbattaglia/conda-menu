@@ -61,7 +61,7 @@
     "dev": "NODE_ENV='development' npm run start",
     "clean": "rm -rf build/Conda-menu-* | rm -rf dist/*",
     "build:macos": "electron-packager . Conda-menu --platform darwin --out build --version=1.4.14 --icon=build/Icon.icns --overwrite --app-bundle-id=com.twbattaglia.conda-menu",
-    "build:windows": "electron-packager . Conda-menu --platform win32 --arch=ia32 --out build --version=1.4.14 --icon=build/Icon.ico --overwrite --app-bundle-id=com.twbattaglia.conda-menu --ignore",
+    "build:windows": "electron-packager . Conda-menu --platform win32 --arch=ia32 --out build --version=1.4.14 --icon=build/Icon.ico --overwrite --app-bundle-id=com.twbattaglia.conda-menu",
     "compress": "bash build/compress.sh",
     "build": "npm run clean && npm run build:macos && npm run build:windows && npm run compress"
   }
