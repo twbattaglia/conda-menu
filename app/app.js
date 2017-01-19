@@ -75,7 +75,7 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
       app.quit();
     };
 
-    // Function to quit the app
+    // Function to refresh env
     var degrees = 360;
     $scope.refresh = function(){
       var csstransition = '1000ms ease';
@@ -138,12 +138,22 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
 
     // Launch conda environment in ipython notebook function
     $scope.launchJupyter = function (envName){
-      console.log("Launching Jupyter: ", envName.prefix);
-      if(os.platform() == "darwin"){
-        var resMac = cspawn.sync('bash', [ __dirname + '/app/cmd/launch_jupyter.sh', envName.prefix], { stdio: 'inherit' });
-      }
-      if(os.platform() == "win32"){
-        shelljs.exec('start cmd /k activate ' + envName.prefix + '; jupyter notebook', function(code, stdout, stderr) {});
+
+      // Check if jupyter package exists
+      if (!shelljs.which('jupyter')) {
+        console.log("Error finding Jupyter package.")
+      } else {
+        console.log("Launching Jupyter: ", envName.prefix);
+
+        // macOS
+        if(os.platform() == "darwin"){
+          var resMac = cspawn.sync('bash', [ __dirname + '/app/cmd/launch_jupyter.sh', envName.prefix], { stdio: 'inherit' });
+        }
+
+        // Windows
+        if(os.platform() == "win32"){
+          shelljs.exec('start cmd /k activate ' + envName.prefix + '; jupyter notebook', function(code, stdout, stderr) {});
+        }
       }
     };
 

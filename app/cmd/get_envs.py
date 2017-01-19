@@ -7,6 +7,14 @@ import sys
 import json
 import subprocess
 
+# If jupyter is not installed, then install
+try:
+	import jupyter
+except ImportError:
+	import pip
+	print('Error: jupyter not found')
+	pip.main(['install', 'jupyter'])
+
 # http://stackoverflow.com/questions/8230315/python-sets-are-not-json-serializable
 # Fix sets in JSON encoding
 class SetEncoder(json.JSONEncoder):
