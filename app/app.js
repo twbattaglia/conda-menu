@@ -141,7 +141,7 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
 
       // Check if jupyter package exists
       if (!shelljs.which('jupyter')) {
-        console.log("Error finding Jupyter package.")
+        console.log("Error finding Jupyter package.");
       } else {
         console.log("Launching Jupyter: ", envName.prefix);
 
