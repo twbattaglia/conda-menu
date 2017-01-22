@@ -1,19 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="description" content="Conda-menu - Manage Conda environments">
+        <meta name="author" content="Conda-menu" />
+        <title>Conda-menu - Manage Conda environments</title>
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="css/style.css" rel="stylesheet">
+        <link rel="icon" href="img/favicon.ico">
+    </head>
+    <body>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
+        <div id="preloader">
+            <div class="spinner"></div>
+        </div>
 
-    <!-- jQuery first, then Tether, then Bootstrap JS. -->
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-  </body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container" id="container-main">
+                <div class="navbar-header page-scroll">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-menu">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <a class="logo page-scroll" href="#header">
+                      <img src="img/icon_nav.png" class="img-responsive" alt="">
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="https://github.com/twbattaglia/conda-menu">Github</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/twbattaglia/conda-menu/issues">Report Issues</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <header id="header">
+            <div class="container">
+                <div class="intro-text">
+                    <h1 class="intro-lead-in">Manage Anaconda virtual environments from your menubar</h1>
+                    <span class="intro-heading">An unoffical way to launch, create, remove, clone and export all of your conda environments. </span>
+                    <div class="header-buttons">
+                        <a href="https://github.com/twbattaglia/conda-menu/releases/download/v0.2.4/conda-menu-mac.dmg" class="primary-button"><span class="fa fa-apple"></span> macOS <small> (.dmg)</small></a>
+                        <a href="https://github.com/twbattaglia/conda-menu/releases/download/v0.2.4/conda-menu-win64.exe" class="primary-button"><span class="fa fa-windows"></span> Windows <small>64 bit (.exe)</small></a>
+                        <a href="https://github.com/twbattaglia/conda-menu/releases/download/v0.2.4/conda-menu-win32.exe" class="primary-button"><span class="fa fa-windows"></span> Windows <small>32 bit (.exe)</small></a>
+                    </div>
+                    <a class="github-button" href="https://github.com/twbattaglia/conda-menu" data-icon="octicon-star" data-style="mega" data-count-href="/twbattaglia/conda-menu/stargazers" data-count-api="/repos/twbattaglia/conda-menu#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star twbattaglia/conda-menu on GitHub">Star</a>
+                </div>
+                <div class="header-dashboard">
+
+                    <div class="col-md-6">
+                      <img src="img/screenshots/main.png" class="slider" alt="">
+                    </div>
+
+                    <div class="col" id="services">
+                      <div class="container" id="container-grid">
+                        <div class="row">
+                          <div class="col-md-3">
+                            <i class="fa fa-terminal fa-3x" aria-hidden="true"></i>
+                            <h4 class="service-heading">Launch</h4>
+                            <p class="service-text">Start a new Terminal or Juputer notebook session within the virtual enviornment and easily begin working.</p>
+                          </div>
+                          <div class="col-md-3">
+                            <i class="fa fa-plus-square-o fa-3x" aria-hidden="true"></i>
+                            <h4 class="service-heading">Create</h4>
+                            <p class="service-text">Make a new conda environment and choose different Python versions, or drag-in a Conda environment file into the window to automatically add it to your system</p>
+                          </div>
+                          <div class="col-md-3">
+                              <i class="fa fa-trash fa-3x" aria-hidden="true"></i>
+                              <h4 class="service-heading">Remove</h4>
+                              <p class="service-text">In a few clicks, remove any unwanted environments from your Anaconda set-up.</p>
+                          </div>
+                          <div class="col-md-3">
+                              <i class="fa fa-share-square-o fa-3x" aria-hidden="true"></i>
+                              <h4 class="service-heading">Share</h4>
+                              <p class="service-text">Generate a reproducible environment file of all installed packages and dependencies from Anaconda and pip</p>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+            <!-- particles -->
+            <div id="particles-js"></div>
+        </header>
+
+        <!-- install steps -->
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 text-center">
+              <h2 class="section-heading">Installation</h2>
+              <span class="separator"></span>
+              <p class="section-subheading "></p>
+              <ul class="nav nav-tabs nav-justified">
+                  <li class="active"><a data-toggle="pill" href="#mac">macOS</a></li>
+                  <li><a data-toggle="pill" href="#windows">Windows</a></li>
+                </ul>
+            </div>
+
+            <div class="tab-content">
+              <div id="mac" class="tab-pane fade in active">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h3 style="text-align:center">Step 1. Install Anaconda/Miniconda</h3>
+                    <h4><a href="https://www.continuum.io/downloads#osx" target="_blank">Download the graphical installer</a></h4>
+                    Double-click the downloaded .pkg file and follow the instructions. Be sure to choose Anaconda as the default system Python.
+                    <img src="img/screenshots/mac_install.png" align="left" alt="">
+                  </div>
+                  <div class="col-md-6">
+                    <h3 style="text-align:center">Step 2. Drag to /Applications</h3>
+                    Once Anaconda is sucessfully installed, drag Conda-menu.app into the /Applications folder and double-click to application to run.
+                    <img src="img/screenshots/mac_drag.png" align="middle" alt="">
+                  </div>
+                </div>
+              </div>
+              <div id="windows" class="tab-pane fade">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h3>Step 1. Install Anaconda/Miniconda</h3>
+                    <h4><a href="https://www.continuum.io/downloads#windows" target="_blank">Download the graphical installer</a></h4>
+                    Double-click the downloaded .exe file and follow the instructions. Be sure to choose Anaconda as the default system Python.
+                  </div>
+                  <div class="col-md-6">
+                    <h3 style="text-align:center">Step 2. Run Conda-menu.exe</h3>
+                    <p>Make a new conda environment and choose different Python versions, or drag-in a Conda environment file into the window to automatically add it to your system</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+        <!-- footer -->
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="lower-footer">
+                        <div class="pull-left">
+                            <span>© 2017 Thomas W. Battaglia. All rights reserved </span>
+                            <a href="https://themeforest.net/item/keysoft-software-landing-page/13766006"> Theme by KeySoft </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- SCRIPTS -->
+        <!-- jQuery & Bootstrap -->
+        <script src="js/jquery.js"></script>
+        <script src="js/jquery.easing.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <!-- smoothscroll  -->
+        <script src="js/smoothscroll.js"></script>
+        <!-- piechart  -->
+        <script src="js/jquery.easytabs.min.js"></script>
+        <!-- tabs  -->
+        <script src="js/piechart.js"></script>
+        <!-- animated header -->
+        <script src="js/particles.js" type="text/javascript"></script>
+        <!-- sliders -->
+        <script src="js/owl.carousel.min.js"></script>
+        <!-- contact form -->
+        <script src="js/jqBootstrapValidation.js"></script>
+        <script src="js/classie.js"></script>
+        <!-- Github buttons -->
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <!-- custom script -->
+        <script src="js/scripts.js"></script>
+    </body>
 </html>
