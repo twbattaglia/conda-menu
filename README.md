@@ -8,8 +8,11 @@
 </h1>
 <h4 align="center">An (unofficial) menubar app for creating and launching conda virtual environments.</h4>
 <p align="center">
+
   <a href="https://travis-ci.org/twbattaglia/conda-menu"><img src="https://travis-ci.org/twbattaglia/conda-menu.svg?branch=master" alt="Travis"></a>
-  [![Build status](https://ci.appveyor.com/api/projects/status/bk171v1wdtog12nv/branch/master?svg=true)](https://ci.appveyor.com/project/twbattaglia/conda-menu/branch/master)
+
+  <a href="https://ci.appveyor.com/project/twbattaglia/conda-menu"><img src="https://ci.appveyor.com/api/projects/status/bk171v1wdtog12nv/branch/master?svg=true" alt="AppVeyor"></a>
+
   <a href="https://github.com/twbattaglia/conda-menu/releases"><img src="https://img.shields.io/github/release/twbattaglia/conda-menu.svg" alt="Release"></a>
 </p>
 
