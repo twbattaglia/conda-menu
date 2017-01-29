@@ -12,9 +12,7 @@ def main(prefix, name, version, pkgs):
 	conda.set_root_prefix(prefix = prefix)
 
 	# Remove special characters from environment name
-	print(name)
 	name_new = ''.join(e for e in name if e.isalnum() or e in "_.")
-	print(name_new)
 
 	# Split list into string
 	pkgsplit = pkgs.split(",")

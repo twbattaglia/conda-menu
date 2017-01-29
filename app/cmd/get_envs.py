@@ -7,6 +7,7 @@ import sys
 import json
 import subprocess
 
+
 # http://stackoverflow.com/questions/8230315/python-sets-are-not-json-serializable
 # Fix sets in JSON encoding
 class SetEncoder(json.JSONEncoder):

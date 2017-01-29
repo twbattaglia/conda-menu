@@ -22,7 +22,7 @@ var condaMenuAutoLauncher = new AutoLaunch({
 
 // Verify anaconda installation
 if (!shelljs.which('conda')) {
-  confirm("Conda installation could not be found! Please install anaconda or miniconda before running again!");
+  confirm("Conda installation could not be found! Please install Anaconda or Miniconda before running again!");
   Shell.openExternal('https://www.continuum.io/downloads');
   app.quit();
 }
@@ -36,7 +36,7 @@ if(os.platform() == "darwin"){
 if(os.platform() == "win32"){
   console.log("Using Windows");
   var prefix = shelljs.which('conda').stdout.replace("CONDA.EXE", "").replace("SCRIPTS", "");
-  console.log(prefix);
+  console.log("Anaconda root prefix:", prefix);
 }
 
 // Set anaconda root prefix
@@ -45,7 +45,7 @@ pythonShell.defaultOptions = {
 };
 
 // Initialize angular apply
-var ngApp = angular.module('ngApp', ['selectize', 'angular-ladda', 'ngAnimate']);
+var ngApp = angular.module('ngApp', ['selectize', 'angular-ladda']);
 
 // Global settings for ladda spinner
 ngApp.config( function(laddaProvider) {
@@ -55,6 +55,7 @@ ngApp.config( function(laddaProvider) {
       spinnerColor: '#ffffff'
     });
 });
+
 
 // Main Controller
 ngApp.controller('mainCtrl', ['$scope', '$location',
@@ -74,10 +75,24 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
       app.quit();
     };
 
-    // Function to refresh envs
-    //$scope.refresh = function(){
-    //  $scope.getCondaEnvs();
-    //};
+    // Function to refresh env
+    var degrees = 360;
+    $scope.refresh = function(){
+      var csstransition = '1000ms ease';
+      var cssrotate = 'rotate(' + degrees + 'deg)';
+      angular.element('#refresh').css({
+        '-webkit-transition': csstransition,
+        '-moz-transition': csstransition,
+        '-o-transition': csstransition,
+        'transition': csstransition,
+        '-moz-transform': cssrotate,
+        '-webkit-transform': cssrotate,
+        '-o-transform': cssrotate,
+        '-ms-transform': cssrotate
+      });
+      degrees += 360;
+      $scope.getCondaEnvs();
+    };
 
     // Get conda environments function
     $scope.getCondaEnvs = function (){
@@ -123,30 +138,40 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
 
     // Launch conda environment in ipython notebook function
     $scope.launchJupyter = function (envName){
-      console.log("Launching Jupyter: ", envName.prefix);
-      if(os.platform() == "darwin"){
-        var resMac = cspawn.sync('bash', [ __dirname + '/app/cmd/launch_jupyter.sh', envName.prefix], { stdio: 'inherit' });
-      }
-      if(os.platform() == "win32"){
-        shelljs.exec('start cmd /k activate ' + envName.prefix + '; jupyter notebook', function(code, stdout, stderr) {});
+
+      // Check if jupyter package exists
+      if (!shelljs.which('jupyter')) {
+        console.log("Error finding Jupyter package.");
+      } else {
+        console.log("Launching Jupyter: ", envName.prefix);
+
+        // macOS
+        if(os.platform() == "darwin"){
+          var resMac = cspawn.sync('bash', [ __dirname + '/app/cmd/launch_jupyter.sh', envName.prefix], { stdio: 'inherit' });
+        }
+
+        // Windows
+        if(os.platform() == "win32"){
+          shelljs.exec('start cmd /k activate ' + envName.prefix + '; jupyter notebook', function(code, stdout, stderr) {});
+        }
       }
     };
 
     // Get installed python packages function
-    $scope.getPipPackages = function (){
-      pythonShell.run('get_installed.py',
-      {mode: 'json'},
-      function (err, results) {
-        if (err) {
-          console.log("Installed error:", err);
-          console.log("Installed results:", results);
-        }
-        console.log("Getting installed packages", results[0]);
-        $scope.$apply(function(){
-            $scope.installed = results[0];
-        });
-      });
-    };
+    //$scope.getPipPackages = function (){
+    //  pythonShell.run('get_installed.py',
+    //  {mode: 'json'},
+    //  function (err, results) {
+    //    if (err) {
+    //      console.log("Installed error:", err);
+    //      console.log("Installed results:", results);
+    //    }
+    //    console.log("Getting installed packages", results[0]);
+    //    $scope.$apply(function(){
+    //        $scope.installed = results[0];
+    //    });
+    //  });
+    //};
 
     // Settings for selectize
     $scope.newEnvVersion = "3.5";
@@ -169,7 +194,7 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
       }
       console.log("Creating environment", name);
       pythonShell.run('create_env.py',
-      {mode: 'json', args: [prefix, name, version, packages]},
+      {args: [prefix, name, version, packages]},
       function (err, results) {
         if (err) {
           console.log("Create error:", err);
@@ -384,7 +409,8 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
 
     // Run at app startup
     $scope.getCondaEnvs();
-    $scope.getPipPackages();
+    setInterval(function(){ $scope.getCondaEnvs(); }, 80000);
+    //$scope.getPipPackages();
     $scope.getCondaInfo();
 
 }]); // End of main controller
