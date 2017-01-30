@@ -23,7 +23,7 @@ var condaMenuAutoLauncher = new AutoLaunch({
 // Verify anaconda installation
 if (!shelljs.which('conda')) {
   confirm("Conda installation could not be found! Please install Anaconda or Miniconda before running again!");
-  Shell.openExternal('https://www.continuum.io/downloads');
+  //Shell.openExternal('https://www.continuum.io/downloads');
   app.quit();
 }
 
@@ -106,6 +106,7 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
         $scope.$apply(function(){
             $scope.environments = results[0];
             $scope.createLoading = false;
+            $scope.hideLoading = true;
         });
       });
     };
@@ -152,7 +153,7 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
 
         // Windows
         if(os.platform() == "win32"){
-          shelljs.exec('start cmd /k activate ' + envName.prefix + '; jupyter notebook', function(code, stdout, stderr) {});
+          shelljs.exec('start cmd /k "activate ' + envName.prefix + ' & jupyter notebook"', function(code, stdout, stderr) {});
         }
       }
     };
@@ -206,6 +207,7 @@ ngApp.controller('mainCtrl', ['$scope', '$location',
         }
         console.log("Creating environment", name, "completed.");
         $scope.getCondaEnvs();
+        $scope.createLoading = false;
         $('#createEnvModal').modal('hide');
         $('#createEnvModal').on('hidden.bs.modal', function () {
             $(this).find('form').trigger('reset');

@@ -1,0 +1,19 @@
+environment:
+  nodejs_version: "6.3.1"
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - npm install
+
+artifacts:
+  - path: dist/*
+    name: dist
+
+test_script:
+  - node --version
+  - npm --version
+  - npm run build:win32
+  - npm run build:win64
+  - npm run package:win32
+  - npm run package:win64
+build: off

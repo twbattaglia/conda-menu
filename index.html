@@ -15,11 +15,10 @@
   </head>
   <body ng-controller='mainCtrl'>
 
-    <!-- Overlay UI -->
+    <!-- Drag and drop overlay UI -->
     <div id="dropoverlay" class="hidden">
       Drop file to create a new conda environment
     </div>
-
 
     <!-- Top Navbar -->
     <div id="header">
@@ -42,8 +41,16 @@
     </div>
 
 
-    <!-- List of Envs -->
+    <!-- Body -->
     <div id="container">
+
+      <!-- Startup loading overlay UI -->
+      <div id="hideoverlay" ng-hide="hideLoading">
+        <i class="icon ion-load-c rotating"></i>
+        <h4>Loading...<h4>
+      </div>
+
+      <!-- List of Envs -->
       <div id="accordion" role="tablist" aria-multiselectable="true">
         <ul class="list-group">
             <li ng-cloak role="tab"

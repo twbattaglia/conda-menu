@@ -37,13 +37,12 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "electron-builder": "latest",
-    "electron-installer-debian": "^0.4.0",
-    "electron-packager": "latest",
-    "electron-prebuilt": "latest",
+    "electron": "^1.4.14",
+    "electron-installer-dmg": "^0.2.0",
+    "electron-packager": "*",
     "electron-rebuild": "latest",
     "electron-reload": "^1.0.3",
-    "electron-winstaller": "^2.3.4",
+    "electron-installer-windows": "^0.2.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-uglify": "^2.0.0",
@@ -60,9 +59,13 @@
     "start": "electron . --enable-logging",
     "dev": "NODE_ENV='development' npm run start",
     "clean": "rm -rf build/Conda-menu-* | rm -rf dist/*",
-    "build:macos": "electron-packager . Conda-menu --platform darwin --out build --version=1.4.14 --icon=build/Icon.icns --overwrite --app-bundle-id=com.twbattaglia.conda-menu",
-    "build:windows": "electron-packager . Conda-menu --platform win32 --arch=ia32 --out build --version=1.4.14 --icon=build/Icon.ico --overwrite --app-bundle-id=com.twbattaglia.conda-menu",
     "compress": "bash build/compress.sh",
-    "build": "npm run clean && npm run build:macos && npm run build:windows && npm run compress"
+    "build": "npm run clean && npm run build:mac && npm run package:mac && npm run build:win32 && npm run build:win64",
+    "build:mac": "electron-packager . Conda-menu --platform darwin --out build --version=1.4.15 --icon=build/Icon.icns --overwrite --app-bundle-id=com.twbattaglia.conda-menu",
+    "package:mac": "electron-installer-dmg build/Conda-menu-darwin-x64/Conda-menu.app Conda-menu --out dist --icon build/dmg_icon.png",
+    "build:win32": "electron-packager . Conda-menu --platform win32 --arch x64 --out build --version=1.4.15 --icon=build/Icon.ico --overwrite --app-bundle-id=com.twbattaglia.conda-menu",
+    "build:win64": "electron-packager . Conda-menu --platform win32 --arch ia32 --out build --version=1.4.15 --icon=build/Icon.ico --overwrite --app-bundle-id=com.twbattaglia.conda-menu",
+    "package:win32": "electron-installer-windows --src build/Conda-menu-win32-ia32 --dest dist/ --name Conda_menu --productName Conda_menu",
+    "package:win64": "electron-installer-windows --src build/Conda-menu-win32-x64 --dest dist/ --name Conda_menu --productName Conda_menu"
   }
 }
