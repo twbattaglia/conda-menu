@@ -37,7 +37,7 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "electron": "^1.4.14",
+    "electron": "^9.1.0",
     "electron-installer-dmg": "^0.2.0",
     "electron-packager": "*",
     "electron-rebuild": "latest",
